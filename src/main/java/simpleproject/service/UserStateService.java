@@ -13,4 +13,7 @@ public interface UserStateService {
 	public List<UserState> getAllRecordsByName(UserState userstate);
 
 	public UserState getRecordById(int id);
+
+	public int delete(int id);
+
 }

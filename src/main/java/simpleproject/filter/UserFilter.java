@@ -39,7 +39,16 @@ public class UserFilter implements Filter {
 		if(url.equals("/SimpleProject/displaystate")) {
 			chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/updatestate")) {
+		if(url.equals("/SimpleProject/stateupdate")) {
+			chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/countryupdate")) {
+			chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/statedelete")) {
+			chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/countrydelete")) {
 			chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/stateadd")) {

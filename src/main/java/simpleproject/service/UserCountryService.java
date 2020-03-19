@@ -9,5 +9,8 @@ public interface UserCountryService {
 	public List<UserCountry> getAllRecords();
 
 	public int save(UserCountry usercountry);
+
+	public int delete(int id);
+
 	
 }

@@ -18,7 +18,9 @@
         <thead>
             <tr>
             	<th>ID</th>
-                <th>City Name</th>              
+                <th>City Name</th> 
+                <th>Update</th>
+                <th>Delete</th>                
             </tr>
         </thead>
         <tbody>            
@@ -27,6 +29,8 @@
             <tr>
                <th>ID</th>
                 <th>City Name</th>
+                <th>Update</th>
+                <th>Delete</th>   
             </tr>
         </tfoot>
     </table>

@@ -62,10 +62,22 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
-		if(url.equals("/SimpleProject/updatestate")) {
+		if(url.equals("/SimpleProject/stateupdate")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			userstate=userstates.getRecordById(id);
 			req.getRequestDispatcher("/addstate.jsp").forward(req, resp);			
+		}
+		if(url.equals("/SimpleProject/countryupdate")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+						
+		}
+		if(url.equals("/SimpleProject/statedelete")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+			int status=userstates.delete(id);			
+		}
+		if(url.equals("/SimpleProject/countrydelete")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+			int status=userCountrys.delete(id);		
 		}
 		if (url.equals("/SimpleProject/displayuser")) {
 			List<User> list = userservice.getAllRecords();

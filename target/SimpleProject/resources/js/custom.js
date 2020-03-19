@@ -24,8 +24,7 @@
  	        		
  	        	}else{
  	        		$(".error").html("");
- 	        	}
- 	         
+ 	        	}	 	         
  	        },
  	        error: function(data) {
  	            alert('woops!');

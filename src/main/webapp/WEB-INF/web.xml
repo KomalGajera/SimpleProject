@@ -56,6 +56,26 @@
   
   <servlet-mapping>
   <servlet-name>s1</servlet-name>
+ <url-pattern>/countrydelete</url-pattern>  
+  </servlet-mapping>
+  
+    <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/countryupdate</url-pattern>  
+  </servlet-mapping>
+  
+    <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/statedelete</url-pattern>  
+  </servlet-mapping>
+  
+    <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/stateupdate</url-pattern>  
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>s1</servlet-name>
  <url-pattern>/checkemail</url-pattern>  
   </servlet-mapping>
   
