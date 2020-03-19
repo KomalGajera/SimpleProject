@@ -73,11 +73,23 @@ public class UserController extends HttpServlet {
 		}
 		if(url.equals("/SimpleProject/statedelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
-			int status=userstates.delete(id);			
+			int status=userstates.delete(id);
+			if(status==1) {
+				req.getRequestDispatcher("/addstate.jsp").forward(req, resp);
+			}else {
+				req.setAttribute("errormessage","There is some error in insert country...");   
+		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
+			}	
 		}
 		if(url.equals("/SimpleProject/countrydelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
-			int status=userCountrys.delete(id);		
+			int status=userCountrys.delete(id);	
+			if(status==1) {
+				req.getRequestDispatcher("/addcountry.jsp").forward(req, resp);
+			}else {
+				req.setAttribute("errormessage","There is some error in insert country...");   
+		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
+			}	
 		}
 		if (url.equals("/SimpleProject/displayuser")) {
 			List<User> list = userservice.getAllRecords();
@@ -233,6 +245,6 @@ public class UserController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doPost(req, resp);
+		doPost(req, resp);
 	}
 }

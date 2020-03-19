@@ -20,6 +20,7 @@
   <filter-name>f1</filter-name>
   <servlet-name>s1</servlet-name>
   </filter-mapping>
+  
 <!--   <filter-mapping>
   <filter-name>f2</filter-name>
   <servlet-name>s2</servlet-name>
@@ -80,11 +81,6 @@
   </servlet-mapping>
   
   
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/stateupdate</url-pattern>  
-  </servlet-mapping>
-  
     <servlet-mapping>
   <servlet-name>s1</servlet-name>
  <url-pattern>/displaycountry</url-pattern>  
@@ -117,7 +113,6 @@
   </servlet-mapping>
   
  <welcome-file-list>
- <welcome-file>Login.jsp</welcome-file>
- 
+ <welcome-file>Login.jsp</welcome-file> 
  </welcome-file-list>
 </web-app>

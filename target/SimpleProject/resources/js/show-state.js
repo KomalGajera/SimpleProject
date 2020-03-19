@@ -13,8 +13,8 @@ $(document).ready(function() {
                 table.append("<tr><td>"+value.state_id+"</td>" +
                 		"<td>"+value.country_name+"</td>"+
                 		"<td>"+value.state_name+"</td>"+
-                		"<td><a href='stateupdate?"+value.state_id+"'>update</a></td>"+
-                    "<td><a href='statedelete?"+value.state_id+"'>delete</a></td></tr>");
+                		"<td><a href='stateupdate?id="+value.state_id+"'>update</a></td>"+
+                    "<td><a href='statedelete?id="+value.state_id+"'>delete</a></td></tr>");
             }); 
             $("#example").DataTable();
         }
