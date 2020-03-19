@@ -58,12 +58,6 @@ public class UserStateDaoImpl implements UserStateDao {
 	}
 
 	@Override
-	public int delete(UserState usercountry) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<UserState> getAllRecordsByName(UserState userstate) {
 		// TODO Auto-generated method stub
 		
@@ -101,6 +95,19 @@ public class UserStateDaoImpl implements UserStateDao {
 	        }  
 	    }catch(Exception e){System.out.println(e);}  
 	    return u; 
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		int status=0;  
+	    try{ 		         
+	        PreparedStatement ps=con.prepareStatement("delete from state_detail where id=?");  
+	        ps.setInt(1,id);  
+	        status=ps.executeUpdate();  
+	    }catch(Exception e){System.out.println(e);}  
+	  
+	    return status;  
 	}
 		 
 

@@ -44,9 +44,8 @@ public class UserCountryDaoimpl implements UserCountryDao {
 		    }catch(Exception e){System.out.println(e);}
 		    return list;  
 	}
-
 	@Override
-	public int delete(UserCountry usercountry) {
+	public int delete(int id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -39,4 +39,11 @@ public class UserStateServiceImpl implements UserStateService {
 		return u;
 	}
 
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		int status=statedao.delete(id);
+		return status;
+	}
+
 }

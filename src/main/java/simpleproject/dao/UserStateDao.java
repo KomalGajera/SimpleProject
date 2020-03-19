@@ -7,7 +7,7 @@ import simpleproject.entitymodel.UserState;
 public interface UserStateDao {
 	public int save(UserState userstate);
 	public List<UserState> getAllRecords();
-	public int delete(UserState usercountry);
+	public int delete(int id);
 	public List<UserState> getAllRecordsByName(UserState userstate);
 	public UserState getRecordById(int id);
 }

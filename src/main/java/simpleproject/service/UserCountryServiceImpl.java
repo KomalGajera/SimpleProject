@@ -23,6 +23,13 @@ public class UserCountryServiceImpl implements UserCountryService {
 		int status=countrydao.save(usercountry);
 		return status;
 	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		int status=countrydao.delete(id);
+		return status;
+	}
 	
 	
 
