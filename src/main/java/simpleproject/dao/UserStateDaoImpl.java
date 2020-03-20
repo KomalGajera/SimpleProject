@@ -14,6 +14,7 @@ public class UserStateDaoImpl implements UserStateDao {
 	
 	DatabaseConnection d=DatabaseConnection.getInstance();
 	Connection con = d.getConnection();
+	@SuppressWarnings("resource")
 	@Override
 	public int save(UserState userstate) {
 		// TODO Auto-generated method stub
@@ -27,11 +28,26 @@ public class UserStateDaoImpl implements UserStateDao {
 	      rs=ps.executeQuery();  
 	      while(rs.next()){  
 	    	    country_id=rs.getInt("country_id");	             
-	      }	    
-		  ps=con.prepareStatement("insert into state_detail(state_name,country_id) values(?,?)");
-		  ps.setString(1,userstate.getState_name());
-		  ps.setInt(2,country_id);	
-		  status=ps.executeUpdate(); 
+	      }	  
+	      ps = con.prepareStatement("select * from state_detail where state_id=?");
+          ps.setInt(1,userstate.getState_id());
+          rs = ps.executeQuery();
+          if(rs.next()) // means record is already available (i.e. Update record)
+          {	        	 
+        	  ps=con.prepareStatement("update state_detail set state_name=?,country_id=? where state_id=?");
+    		  ps.setString(1,userstate.getState_name());	
+    		  ps.setInt(2,country_id);
+    		  ps.setInt(3, userstate.getState_id());
+    		  status=ps.executeUpdate(); 
+          }
+          else            // means no record available (i.e. insert a record)
+          {	        	 
+        	  ps=con.prepareStatement("insert into state_detail(state_name,country_id) values(?,?)");
+    		  ps.setString(1,userstate.getState_name());
+    		  ps.setInt(2,country_id);	
+    		  status=ps.executeUpdate(); 
+          }		
+		
 		  }catch(Exception e){System.out.println(e);} 
 	       return status; 
 	}
@@ -102,7 +118,7 @@ public class UserStateDaoImpl implements UserStateDao {
 		// TODO Auto-generated method stub
 		int status=0;  
 	    try{ 		         
-	        PreparedStatement ps=con.prepareStatement("delete from state_detail where id=?");  
+	        PreparedStatement ps=con.prepareStatement("delete from state_detail where state_id=?");  
 	        ps.setInt(1,id);  
 	        status=ps.executeUpdate();  
 	    }catch(Exception e){System.out.println(e);}  

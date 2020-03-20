@@ -54,28 +54,58 @@ public class UserController extends HttpServlet {
 		HttpServletRequest requestTemp = (HttpServletRequest) req;
 		HttpSession session = req.getSession();
 		String url = requestTemp.getRequestURI();
-		String json = null;
-		
+		String json = null;		
 		if (url.equals("/SimpleProject/displaycountry")) {
 			List<UserCountry> list = userCountrys.getAllRecords();
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
+		if(url.equals("/SimpleProject/userbyid")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+			user=userservice.getRecordById(id);
+			json = new Gson().toJson(user);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);
+			
+		}
+		if(url.equals("/SimpleProject/useraddress")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+			List<String> list=useraddress.getRecordById(id);
+			json = new Gson().toJson(list);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);
+			
+		}
 		if(url.equals("/SimpleProject/stateupdate")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			userstate=userstates.getRecordById(id);
-			req.getRequestDispatcher("/addstate.jsp").forward(req, resp);			
+			json = new Gson().toJson(userstate);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);			
 		}
 		if(url.equals("/SimpleProject/countryupdate")) {
 			int id=Integer.parseInt(req.getParameter("id"));
-						
+			usercountry=userCountrys.getRecordById(id);
+			json = new Gson().toJson(usercountry);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);
 		}
 		if(url.equals("/SimpleProject/statedelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userstates.delete(id);
 			if(status==1) {
 				req.getRequestDispatcher("/addstate.jsp").forward(req, resp);
+			}else {
+				req.setAttribute("errormessage","There is some error in insert country...");   
+		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
+			}	
+		}
+		if(url.equals("/SimpleProject/userdelete")) {
+			int id=Integer.parseInt(req.getParameter("id"));
+			int status=userservice.delete(id);
+			if(status==1) {
+				req.getRequestDispatcher("/user.jsp").forward(req, resp);
 			}else {
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
@@ -120,7 +150,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
-		if (url.equals("/SimpleProject/countryadd")) {			
+		if (url.equals("/SimpleProject/countryadd")) {	
+			
+			usercountry.setCountry_id(Integer.parseInt(req.getParameter("country_id")));
 			usercountry.setCountry_name(req.getParameter("country"));
 			int status=userCountrys.save(usercountry);
 			if(status==1) {
@@ -128,9 +160,10 @@ public class UserController extends HttpServlet {
 			}else {
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
-			}			
+			}		
 		}	
 		if (url.equals("/SimpleProject/stateadd")) {
+			userstate.setState_id(Integer.parseInt(req.getParameter("state_id")));
 			userstate.setState_name(req.getParameter("state"));
 			userstate.setCountry_name(req.getParameter("selectcountry"));
 			int status=userstates.save(userstate);

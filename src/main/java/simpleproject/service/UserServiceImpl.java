@@ -58,4 +58,18 @@ public class UserServiceImpl implements UserService {
 		return status;
 	}
 
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		int status=userdao.delete(id);
+		return status;
+	}
+
+	@Override
+	public User getRecordById(int id) {
+		// TODO Auto-generated method stub
+		User u=userdao.getRecordById(id);
+		return u;
+	}
+
 }

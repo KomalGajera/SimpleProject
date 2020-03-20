@@ -15,14 +15,29 @@ public class UserCountryDaoimpl implements UserCountryDao {
 	Connection con = d.getConnection(); 	
 	
 
+	@SuppressWarnings("resource")
 	@Override
 	public int save(UserCountry usercountry) {
 		// TODO Auto-generated method stub
-		  int status=0; 
-	      try{  PreparedStatement
-		  ps=con.prepareStatement("insert into country_detail(country_name) values(?)");
-		  ps.setString(1,usercountry.getCountry_name());		 
-		  status=ps.executeUpdate(); 
+		  int status=0;
+		  PreparedStatement ps;
+	      try{  
+	    	  ps = con.prepareStatement("select * from country_detail where country_id=?");
+	          ps.setInt(1,usercountry.getCountry_id());
+	          ResultSet rs = ps.executeQuery();
+	          if(rs.next()) // means record is already available (i.e. Update record)
+	          {	        	 
+	        	  ps=con.prepareStatement("update country_detail set country_name=? where country_id=?");
+	    		  ps.setString(1,usercountry.getCountry_name());	
+	    		  ps.setInt(2, usercountry.getCountry_id());
+	    		  status=ps.executeUpdate(); 
+	          }
+	          else            // means no record available (i.e. insert a record)
+	          {	        	 
+	        	  ps=con.prepareStatement("insert into country_detail(country_name) values(?)");
+	    		  ps.setString(1,usercountry.getCountry_name());		 
+	    		  status=ps.executeUpdate(); 
+	          }		 
 		  }catch(Exception e){System.out.println(e);} 
 	       return status; 
 	}
@@ -47,7 +62,37 @@ public class UserCountryDaoimpl implements UserCountryDao {
 	@Override
 	public int delete(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		int status=0;  
+		PreparedStatement ps;
+	    try{ 		         
+	    	ps=con.prepareStatement("delete from state_detail where country_id=?");  
+	        ps.setInt(1,id);  
+	        ps.executeUpdate();  
+	        	ps=con.prepareStatement("delete from country_detail where country_id=?");  
+		        ps.setInt(1,id);  
+		        status=ps.executeUpdate();	        
+	    }catch(Exception e){System.out.println(e);}  
+	  
+	    return status; 
+	}
+
+	@Override
+	public UserCountry getRecordById(int id) {
+		// TODO Auto-generated method stub
+		UserCountry u=null;  
+	    try{  
+	       
+	        PreparedStatement ps=con.prepareStatement("select * from country_detail where country_id=?");  
+	        ps.setInt(1,id);  
+	        ResultSet rs=ps.executeQuery();  
+	        while(rs.next()){  
+	            u=new UserCountry();  
+	            u.setCountry_id((rs.getInt("country_id"))); 
+	            u.setCountry_name(rs.getString("country_name"));  
+	           
+	        }  
+	    }catch(Exception e){System.out.println(e);}  
+	    return u; 
 	}
 	
 	

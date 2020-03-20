@@ -12,7 +12,6 @@
 <body>
 
 <%@include file="header.jsp" %>
-
 <div class='table-container'>
    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -46,6 +45,10 @@
 		</select>
         <div class="select-dropdown"></div>
   </div>  
+    <div class="form-group" id="main_stateid">
+      <label for="stateid">county id:</label>
+      <input type="text" class="form-control" id="state_id" name="state_id" value="0">
+    </div> 
     <div class="form-group">
       <label for="country">Add State:</label>
       <input type="text" class="form-control" id="state" placeholder="Enter state" name="state">

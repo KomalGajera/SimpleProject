@@ -12,5 +12,7 @@ public interface UserCountryService {
 
 	public int delete(int id);
 
+	public UserCountry getRecordById(int id);
+
 	
 }

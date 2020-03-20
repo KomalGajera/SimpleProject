@@ -14,5 +14,7 @@ public interface UserService {
 	public int save(User user, InputStream inputStream);
 	public int checkuser(User user);
 	public int usercheck(String email);
+	public int delete(int id);
+	public User getRecordById(int id);
 
 }

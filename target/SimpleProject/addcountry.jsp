@@ -38,6 +38,11 @@
    
  <div class="container" id="country12">
   <form action="countryadd" method="post"> 
+  <h3>Country-Form</h3>
+  <div class="form-group" id="main_countryid">
+      <label for="countryid">county id:</label>
+      <input type="text" class="form-control" id="country_id" name="country_id" value="0">
+    </div> 
     <div class="form-group">
       <label for="country">Add Country:</label>
       <input type="text" class="form-control" id="country" placeholder="Enter country" name="country">

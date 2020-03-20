@@ -35,11 +35,8 @@ public class UserDaoImpl implements UserDao {
 	      ps.setString(1, u.getState());
 	      rs=ps.executeQuery();
 	      while(rs.next()){  
-	    	  	System.out.println("hello");
 	    	    state_id=rs.getInt("state_id");	             
 	      }	      
-	      System.out.println(country_id);
-	      System.out.println(state_id);
 	      ps=con.prepareStatement("insert into user_detail(fname,lastname,profile,password,gender,country_id,state_id,email,phone_no,hobby,birthdate) values(?,?,?,?,?,?,?,?,?,?,?)");
 		  ps.setString(1,u.getFname());
 		  ps.setString(2,u.getLname());
@@ -85,16 +82,33 @@ public class UserDaoImpl implements UserDao {
 		    return list;  
 	}
 
-	@Override
-	public int delete(User u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public User getRecordById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		User u=null;		      
+	    try{  
+	        
+	    	PreparedStatement ps=con.prepareStatement("select user_id,fname,lastname,profile,gender,email,phone_no,hobby,birthdate,role,country_name,state_name from user_detail u,country_detail c,state_detail s where u.country_id=c.country_id and u.state_id=s.state_id and user_id=?");
+	    	ps.setInt(1, id);
+	        ResultSet rs=ps.executeQuery();  
+	        while(rs.next()){  		        	
+	            u=new User();  
+	            u.setId(rs.getInt("user_id"));	  
+	            u.setFname(rs.getString("fname"));
+	            u.setLname(rs.getString("lastname"));
+	            u.setImageData(rs.getBytes("profile"));
+	            u.setGender(rs.getString("gender"));
+	            u.setEmail(rs.getString("email"));
+	            u.setNumber(rs.getLong("phone_no"));
+	            u.setHobby(rs.getString("hobby"));
+	            u.setDob(rs.getString("birthdate"));
+	            u.setRole(rs.getString("role"));
+	            u.setCountry(rs.getString("country_name"));
+	            u.setState(rs.getString("state_name"));		            
+	         }  
+	    }catch(Exception e){System.out.println(e);}
+	    return u;  
 	}
 
 	@Override
@@ -157,6 +171,17 @@ public class UserDaoImpl implements UserDao {
 			  if (rs.next()) {  
 		          status=1;
 			  } 
+			  }catch(Exception e){System.out.println(e);} 
+		  	  return status;
+	}
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		int status=0;
+		  try{ 			  
+		      PreparedStatement ps=con.prepareStatement("delete from user_detail where user_id=?");
+			  ps.setInt(1,id);
+			  status=ps.executeUpdate();
 			  }catch(Exception e){System.out.println(e);} 
 		  	  return status;
 	}

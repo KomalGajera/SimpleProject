@@ -3,6 +3,7 @@ package simpleproject.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import simpleproject.db.DatabaseConnection;
 import simpleproject.entitymodel.User;
@@ -49,6 +50,13 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	public int update(User u) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<String> getRecordById(int id) {
+		// TODO Auto-generated method stub
+		List<String> list = null;
+		return list;
 	}
 
 }

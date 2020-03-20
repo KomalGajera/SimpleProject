@@ -44,6 +44,7 @@
   <servlet-class>simpleproject.controller.ImageServlet</servlet-class>
   </servlet>
   
+  
   <servlet-mapping>
   <servlet-name>s3</servlet-name>
   <url-pattern>/image</url-pattern>
@@ -57,8 +58,19 @@
   
   <servlet-mapping>
   <servlet-name>s1</servlet-name>
+ <url-pattern>/useraddress</url-pattern>  
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>s1</servlet-name>
  <url-pattern>/countrydelete</url-pattern>  
   </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/userbyid</url-pattern>  
+  </servlet-mapping>
+  
+  
   
     <servlet-mapping>
   <servlet-name>s1</servlet-name>
@@ -73,6 +85,11 @@
     <servlet-mapping>
   <servlet-name>s1</servlet-name>
  <url-pattern>/stateupdate</url-pattern>  
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/userdelete</url-pattern>  
   </servlet-mapping>
   
   <servlet-mapping>

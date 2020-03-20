@@ -30,6 +30,13 @@ public class UserCountryServiceImpl implements UserCountryService {
 		int status=countrydao.delete(id);
 		return status;
 	}
+
+	@Override
+	public UserCountry getRecordById(int id) {
+		// TODO Auto-generated method stub
+		UserCountry u=countrydao.getRecordById(id);
+		return u;
+	}
 	
 	
 

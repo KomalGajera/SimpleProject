@@ -28,6 +28,7 @@
                 <th>State</th>
                 <th>Hobby</th>
                 <th>role</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>           
@@ -45,6 +46,7 @@
                 <th>State</th>
                 <th>Hobby</th>
                 <th>role</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>

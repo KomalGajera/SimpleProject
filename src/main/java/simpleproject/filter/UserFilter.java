@@ -30,6 +30,9 @@ public class UserFilter implements Filter {
 		if(url.equals("/SimpleProject/register")) {			
 		    	chain.doFilter(req, resp);
 		}
+		if(url.equals("/SimpleProject/useraddress")) {			
+	    	chain.doFilter(req, resp);
+		}
 		if(url.equals("/SimpleProject/checkemail")) {			
 	    	chain.doFilter(req, resp);
 		}
@@ -60,6 +63,14 @@ public class UserFilter implements Filter {
 	    	chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/displayuser")) {
+			
+	    	chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/userbyid")) {
+			
+	    	chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/userdelete")) {
 			
 	    	chain.doFilter(req, resp);
 		}
