@@ -21,8 +21,7 @@ $(document).ready(function() {
     });
     
     $.myjQuery = function(paramater) {
-    	$.ajax({
-    		
+    	$.ajax({    		
             url: 'stateupdate',data:"id="+paramater,
             type: "GET",
             success: function (data) {

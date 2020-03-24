@@ -27,9 +27,13 @@ public class UserFilter implements Filter {
 		String url = requestTemp.getRequestURI();		
 	
 		
-		if(url.equals("/SimpleProject/register")) {			
-		    	chain.doFilter(req, resp);
+		if(url.equals("/SimpleProject/register")) {		
+			System.out.println("hello");
+		    	//chain.doFilter(req, resp);
 		}
+		if(url.equals("/SimpleProject/checkuser")) {			
+	    	chain.doFilter(req, resp);
+	}
 		if(url.equals("/SimpleProject/useraddress")) {			
 	    	chain.doFilter(req, resp);
 		}
@@ -58,12 +62,10 @@ public class UserFilter implements Filter {
 			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/login")) {
-			
+		if(url.equals("/SimpleProject/login")) {			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/displayuser")) {
-			
+		if(url.equals("/SimpleProject/displayuser")) {			
 	    	chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/userbyid")) {
@@ -71,6 +73,10 @@ public class UserFilter implements Filter {
 	    	chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/userdelete")) {
+			
+	    	chain.doFilter(req, resp);
+		}
+		if(url.equals("/SimpleProject/changepassword")) {
 			
 	    	chain.doFilter(req, resp);
 		}

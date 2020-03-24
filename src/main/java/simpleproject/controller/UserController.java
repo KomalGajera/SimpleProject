@@ -71,7 +71,8 @@ public class UserController extends HttpServlet {
 		}
 		if(url.equals("/SimpleProject/useraddress")) {
 			int id=Integer.parseInt(req.getParameter("id"));
-			List<String> list=useraddress.getRecordById(id);
+			System.out.println(id);
+			List<User> list=useraddress.getRecordById(id);
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
             resp.getWriter().write(json);
@@ -127,11 +128,24 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
+		if (url.equals("/SimpleProject/changepassword")) {
+			System.out.println("hello");
+			user.setEmail(req.getParameter("email"));
+			user.setPassword(req.getParameter("password"));
+			int status= userservice.getUserByEmail(user);
+			if(status==1) {
+				req.getRequestDispatcher("/Login.jsp").forward(req, resp);
+			}else {
+				req.setAttribute("errormessage","There is some error in updating password...");   
+		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
+			}
+						
+		}
 		if (url.equals("/SimpleProject/checkemail")) {
-			System.out.println(req.getParameter("email"));
-			
+			System.out.println(req.getParameter("email"));			
 			  int status = userservice.usercheck(req.getParameter("email")); 
-			  json = new  Gson().toJson(status); resp.setContentType("application/json");
+			  json = new  Gson().toJson(status); 
+			  resp.setContentType("application/json");
 			  resp.getWriter().write(json);
 			 			
 		}
@@ -186,22 +200,26 @@ public class UserController extends HttpServlet {
 			user.setEmail(req.getParameter("email"));
 			user.setPassword(req.getParameter("password"));
 			int status=userservice.checkuser(user);
+			
 			if(status==1)
 			{
 				if(user.getRole().equals("admin"))
-				{					
-					session.setAttribute("adminuser",user.getFname());
+				{	
+					session.setAttribute("user", user.getRole());
+					session.setAttribute("userid", user.getId());
+					session.setAttribute("username",user.getFname());
 					session.setMaxInactiveInterval(3000);
 					resp.sendRedirect("index.jsp");
 				}
-			/*	else
+				else
 				{
-					System.out.println("else condidtion");
-					session.setAttribute("normaluser",user.getFname());
+					session.setAttribute("user", user.getRole());
+					session.setAttribute("userid", user.getId());
+					session.setAttribute("username",user.getFname());
 					System.out.println(session.getAttribute("normaluser"));
 					session.setMaxInactiveInterval(3000);
 					resp.sendRedirect("index.jsp");
-				}	*/							
+				}						
 			}
 			else {
 				req.setAttribute("errormessage","sorry username and password are wrong...");   

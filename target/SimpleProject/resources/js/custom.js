@@ -1,6 +1,50 @@
 (function($) {
 	'use strict';
 	
+	$('#regis').on('click', function () {
+		 alert(hello);
+		});
+	var table = $("#example");
+	var id = getUrlVars()["id"];	
+	if(id!=undefined)
+		{
+		
+		$.ajax({url: "userbyid",type:'POST',data:"id="+id,
+	        success: function(data){      	        	        
+	        	var abc=JSON.stringify(data);
+            	var value = JSON.parse(abc);
+            	alert(abc);
+            	$('#fname').val(value.fname);
+            	$('#lname').val(value.lname);
+            	$('#email').val(value.email);
+            	$('#contact_no').val(value.number);
+            	$('#psw').val(value.password);
+            	$('#psw_confirm').val(value.password);
+            	$('#birthdate').val(value.dob);
+            	$('#country').val(value.country);
+            	$('#state').val(value.state);
+            	$('#profileimg').attr('src',"image?name="+value.fname+"");
+            	if(value.gender=='female')
+            	{
+            		$("#female").attr('checked', 'checked');
+            	}
+            	if(value.gender=='male')
+            	{
+            		$("#male").attr('checked', 'checked');
+            	}
+            	var element=value.hobby.split(' ');
+            	$.each(element,function(index,hobby){
+            		$('input[type=checkbox]').filter(function(){
+            			   return this.value === hobby;
+            			}).prop('checked', true);
+            	});
+            	
+	        },
+	        error: function(data) {
+	            alert('woops!');
+	        } 
+		});
+	}
 	
 	$.ajax({url: "displaycountry",type:'POST',
         success: function(list){      	        	
@@ -13,8 +57,8 @@
             alert('woops!');
         } 
 	});
-	$("#email").blur(function(){
-			
+	
+	$("#email").blur(function(){			
 		 	var email=$( "#email" ).val();    	
  			$.ajax({url: "checkemail",type:'POST',data:'email='+email,
  			
@@ -137,3 +181,19 @@
 	}
 
 })(jQuery);
+/*function validate(){
+	var numItems = $('.yourclass').length
+	alert("hello");
+}*/
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}

@@ -69,7 +69,24 @@ public class UserServiceImpl implements UserService {
 	public User getRecordById(int id) {
 		// TODO Auto-generated method stub
 		User u=userdao.getRecordById(id);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		 try {
+	            Date date = formatter.parse(u.getDob());
+	            formatter.applyPattern("dd/MM/yyyy");
+	            u.setDob(formatter.format(date));
+
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+		
 		return u;
+	}
+
+	@Override
+	public int getUserByEmail(User user) {
+		// TODO Auto-generated method stub
+		int status=userdao.getUserByEmail(user);
+		return status;
 	}
 
 }

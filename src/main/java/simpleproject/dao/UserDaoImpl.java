@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
 	DatabaseConnection d=DatabaseConnection.getInstance();
 	Connection con = d.getConnection(); 
 
+	@SuppressWarnings("resource")
 	@Override
 	public int save(User u, InputStream inputStream) {
 		// TODO Auto-generated method stub
@@ -36,20 +37,45 @@ public class UserDaoImpl implements UserDao {
 	      rs=ps.executeQuery();
 	      while(rs.next()){  
 	    	    state_id=rs.getInt("state_id");	             
-	      }	      
-	      ps=con.prepareStatement("insert into user_detail(fname,lastname,profile,password,gender,country_id,state_id,email,phone_no,hobby,birthdate) values(?,?,?,?,?,?,?,?,?,?,?)");
-		  ps.setString(1,u.getFname());
-		  ps.setString(2,u.getLname());
-		  ps.setBinaryStream(3,(InputStream) inputStream); 
-		  ps.setString(4,u.getPassword());
-		  ps.setString(5,u.getGender());
-		  ps.setInt(6,country_id);
-		  ps.setInt(7, state_id);
-		  ps.setString(8, u.getEmail());
-		  ps.setLong(9,u.getNumber());
-		  ps.setString(10, u.getHobby());
-		  ps.setString(11, u.getDob());
-		  status=ps.executeUpdate();  
+	      }
+	      ps = con.prepareStatement("select * from user_detail where User_id=?");
+          ps.setInt(1,u.getId());
+          rs = ps.executeQuery();
+          if(rs.next()) // means record is already available (i.e. Update record)
+          {	        	 
+        	  ps=con.prepareStatement("update user_detail set fname=?,lastname=?,profile=?,password=?,gender=?,country_id=?,state_id=?,email=?,phone_no=?,hobby=?,birthdate=? where user_id=? ");
+    		  ps.setString(1,u.getFname());
+    		  ps.setString(2,u.getLname());
+    		  ps.setBinaryStream(3,(InputStream) inputStream); 
+    		  ps.setString(4,u.getPassword());
+    		  ps.setString(5,u.getGender());
+    		  ps.setInt(6,country_id);
+    		  ps.setInt(7, state_id);
+    		  ps.setString(8, u.getEmail());
+    		  ps.setLong(9,u.getNumber());
+    		  ps.setString(10, u.getHobby());
+    		  ps.setString(11, u.getDob());
+    		  ps.setInt(11, u.getId());
+    		  status=ps.executeUpdate();  
+          }
+          else            // means no record available (i.e. insert a record)
+          {	        	 
+        	  ps=con.prepareStatement("insert into user_detail(fname,lastname,profile,password,gender,country_id,state_id,email,phone_no,hobby,birthdate) values(?,?,?,?,?,?,?,?,?,?,?)");
+    		  ps.setString(1,u.getFname());
+    		  ps.setString(2,u.getLname());
+    		  ps.setBinaryStream(3,(InputStream) inputStream); 
+    		  ps.setString(4,u.getPassword());
+    		  ps.setString(5,u.getGender());
+    		  ps.setInt(6,country_id);
+    		  ps.setInt(7, state_id);
+    		  ps.setString(8, u.getEmail());
+    		  ps.setLong(9,u.getNumber());
+    		  ps.setString(10, u.getHobby());
+    		  ps.setString(11, u.getDob());
+    		  status=ps.executeUpdate();  
+          }		
+	      
+	     
 		  }catch(Exception e){System.out.println(e);}
 	       return status; 
 	}
@@ -75,8 +101,7 @@ public class UserDaoImpl implements UserDao {
 		            u.setRole(rs.getString("role"));
 		            u.setCountry(rs.getString("country_name"));
 		            u.setState(rs.getString("state_name"));		            
-		            list.add(u);  	
-		            
+		            list.add(u);  			            
 		        }  
 		    }catch(Exception e){System.out.println(e);}
 		    return list;  
@@ -89,7 +114,7 @@ public class UserDaoImpl implements UserDao {
 		User u=null;		      
 	    try{  
 	        
-	    	PreparedStatement ps=con.prepareStatement("select user_id,fname,lastname,profile,gender,email,phone_no,hobby,birthdate,role,country_name,state_name from user_detail u,country_detail c,state_detail s where u.country_id=c.country_id and u.state_id=s.state_id and user_id=?");
+	    	PreparedStatement ps=con.prepareStatement("select user_id,fname,lastname,password,profile,gender,email,phone_no,hobby,birthdate,role,country_name,state_name from user_detail u,country_detail c,state_detail s where u.country_id=c.country_id and u.state_id=s.state_id and user_id=?");
 	    	ps.setInt(1, id);
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  		        	
@@ -100,12 +125,14 @@ public class UserDaoImpl implements UserDao {
 	            u.setImageData(rs.getBytes("profile"));
 	            u.setGender(rs.getString("gender"));
 	            u.setEmail(rs.getString("email"));
+	            u.setPassword(rs.getString("password"));
 	            u.setNumber(rs.getLong("phone_no"));
 	            u.setHobby(rs.getString("hobby"));
 	            u.setDob(rs.getString("birthdate"));
 	            u.setRole(rs.getString("role"));
 	            u.setCountry(rs.getString("country_name"));
-	            u.setState(rs.getString("state_name"));		            
+	            u.setState(rs.getString("state_name"));	
+	            System.out.print(rs.getLong("phone_no"));
 	         }  
 	    }catch(Exception e){System.out.println(e);}
 	    return u;  
@@ -129,8 +156,8 @@ public class UserDaoImpl implements UserDao {
 			  ResultSet rs=ps.executeQuery();
 			  if (rs.next()) {  
 		          u.setFname(rs.getString("fname"));
-		          u.setRole(rs.getString("role"));
-		          System.out.print(u.getFname());		          
+		          u.setId(rs.getInt("user_id"));
+		          u.setRole(rs.getString("role"));	
 		          status=1;
 			  } 
 			  }catch(Exception e){System.out.println(e);} 
@@ -184,6 +211,26 @@ public class UserDaoImpl implements UserDao {
 			  status=ps.executeUpdate();
 			  }catch(Exception e){System.out.println(e);} 
 		  	  return status;
+	}
+	@Override
+	public int getUserByEmail(User user) {
+		// TODO Auto-generated method stub
+		int status=0;
+		PreparedStatement ps;
+		ResultSet rs;
+		 try{ 
+			  
+		      ps=con.prepareStatement("select * from user_detail where email=?");
+			  ps.setString(1,user.getEmail());
+			  rs=ps.executeQuery();
+			  if (rs.next()) {  
+				  ps=con.prepareStatement("update user_detail set password=? where email=?");
+	    		  ps.setString(1,user.getPassword());	
+	    		  ps.setString(2, user.getEmail());
+	    		  status=ps.executeUpdate(); 
+			  } 
+			  }catch(Exception e){System.out.println(e);} 
+		return status;
 	}
 
 	

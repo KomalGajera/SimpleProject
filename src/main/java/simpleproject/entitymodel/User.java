@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
 
 	private int id;
-	private String fname, lname, address[], password, dob, gender, hobby, country, state, email, role;
+	private String fname, lname, address[], password, dob, gender, hobby, country, state, email, role,add;
 	private long number;
 	private byte[] imageData;
 	private String imageFileName;
@@ -137,6 +137,14 @@ public class User {
 
 	public void setAaData(List<User> aaData) {
 		this.aaData = aaData;
+	}
+
+	public String getAdd() {
+		return add;
+	}
+
+	public void setAdd(String add) {
+		this.add = add;
 	}
 
 }

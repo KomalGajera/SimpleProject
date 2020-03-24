@@ -103,7 +103,7 @@
                                 <div class="input-group">
                                     <label class="label">Birthday</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate" id="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
                             </div>
@@ -112,10 +112,10 @@
                                     <label class="label">Gender</label>
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">Male <input
-											type="radio" checked="checked" name="gender" value="male"> <span
+											type="radio" checked="checked" name="gender" value="male" id="male"> <span
 											class="checkmark"></span>
 										</label> <label class="radio-container">Female <input
-											type="radio" name="gender" value="female"> <span class="checkmark"></span>
+											type="radio" name="gender" value="female" id="female"> <span class="checkmark"></span>
 										</label>
                                     </div>
                                 </div>
@@ -125,13 +125,13 @@
                             <label class="label">Hobby</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <div>
-                                    <input type="checkbox" id="dancing" name="hobby" value="dance"> <label for="dancing"> dancing</label>
+                                    <input type="checkbox" id="dance" name="hobby" value="dance"> <label for="dancing"> dancing</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" id="singing" name="hobby" value="sing"> <label for="singing"> singing</label>
+                                    <input type="checkbox" id="sing" name="hobby" value="sing"> <label for="singing"> singing</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" id="travelling" name="hobby" value="travel"> <label for="travelling">travelling</label>
+                                    <input type="checkbox" id="travel" name="hobby" value="travel"> <label for="travelling">travelling</label>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
 					       <label class="label">Country</label>
 					       <div class="rs-select2 js-select-simple select--no-search">
 					       <select name="country" id="country" class="form-control">
-						   <option disabled="disabled" selected="selected" value="0">Choose Country</option>		  
+<!-- 						   <option disabled="disabled" selected="selected" value="0">Choose Country</option>		   -->
 							</select>
 					        <div class="select-dropdown"></div>
 					 	 </div>
@@ -171,7 +171,7 @@
 					       <label class="label">state</label>
 					       <div class="rs-select2 js-select-simple select--no-search">
 					       <select name="state" id="state" class="form-control">
-						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		  
+<!-- 						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		   -->
 							</select>
 					        <div class="select-dropdown"></div>
 					 	 </div>
@@ -179,7 +179,7 @@
                         <span id="countrymessage"> </span><br>
                         <span id="statemessage"> </span><br>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" onclick="return Validate()">Submit</button>
+                            <button id="regis" class="btn btn--radius-2 btn--blue" type="submit" onclick="return Validate()">Submit</button>
                         </div>
                     </form>
                 </div>

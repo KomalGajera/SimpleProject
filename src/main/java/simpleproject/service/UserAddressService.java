@@ -9,6 +9,6 @@ public interface UserAddressService {
 	public int save(User u);
 	public int delete(User u);	
 	public int update(User u);
-	public List<String> getRecordById(int id);
+	public List<User> getRecordById(int id);
 
 }

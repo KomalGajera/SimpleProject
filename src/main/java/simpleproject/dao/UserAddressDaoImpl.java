@@ -3,10 +3,12 @@ package simpleproject.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import simpleproject.db.DatabaseConnection;
 import simpleproject.entitymodel.User;
+import simpleproject.entitymodel.UserCountry;
 
 public class UserAddressDaoImpl implements UserAddressDao {
 	
@@ -53,9 +55,21 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	}
 
 	@Override
-	public List<String> getRecordById(int id) {
+	public List<User> getRecordById(int id) {
 		// TODO Auto-generated method stub
-		List<String> list = null;
+		List<User> list=new ArrayList<User>(); 
+		
+		 try{  
+		       
+		        PreparedStatement ps=con.prepareStatement("select * from user_address where user_id=?");  
+		        ps.setInt(1,id);  
+		        ResultSet rs=ps.executeQuery();  
+		        while(rs.next()){   
+		           User u=new User();
+		           u.setAdd(rs.getString("address"));
+		           list.add(u);		          
+		        }  
+		    }catch(Exception e){System.out.println(e);}  
 		return list;
 	}
 

@@ -14,6 +14,7 @@ public interface UserDao {
 	public int update(User u);
 	public int checkuser(User u);
 	public User getImageInTable(String name);
-	public int usercheck(String email); 
+	public int usercheck(String email);
+	public int getUserByEmail(User user); 
 
 }

@@ -9,17 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:remove var="adminuser" scope="session"/>
+<c:remove var="username" scope="session"/>
+<c:remove var="user" scope="session"/>
 <%
 response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", 0);
 
-if(session.getAttribute("user")==null)
+if(session.getAttribute("username")==null)
     response.sendRedirect("Login.jsp");
-
-
 %>
 </body>
 </html>

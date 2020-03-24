@@ -29,9 +29,9 @@ public class UserAddressServiceImpl implements UserAddressService {
 	}
 
 	@Override
-	public List<String> getRecordById(int id) {
+	public List<User> getRecordById(int id) {
 		// TODO Auto-generated method stub
-		List<String> list=useraddress.getRecordById(id);
+		List<User> list=useraddress.getRecordById(id);
 		return list;
 	}
 

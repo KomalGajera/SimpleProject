@@ -16,5 +16,6 @@ public interface UserService {
 	public int usercheck(String email);
 	public int delete(int id);
 	public User getRecordById(int id);
+	public int getUserByEmail(User user);
 
 }
