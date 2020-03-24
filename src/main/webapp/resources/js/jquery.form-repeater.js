@@ -60,7 +60,6 @@
  */
 (function($) {
 	
-	
     $.fn.repeater = function(options, data) {
         var $container = $(this),
             $btnAdd, $btnRemove, patternName, patternId, patternText,
@@ -201,7 +200,7 @@
 
                 // calculate the repeatCount based on whats in the dom
                 $container.repeatCount = $container.find('.' + $container.opts.groupClass).length - 1;
-
+                $('#length').val($container.repeatCount);
                 // shows removal buttons only inside the new clone when were above the minItems count
                 if ($container.repeatCount > $container.opts.minItems - 1) {
                     $newClone.find('.' + $container.opts.btnRemoveClass).show();
@@ -232,7 +231,6 @@
         var container = data.data,
             tmpCount = container.repeatCount + 1,
             $doppleganger = container.groupClone.clone();
-
         if ($.isFunction(container.opts.beforeAdd)) {
             $doppleganger = container.opts.beforeAdd.call(this, $doppleganger);
         }
@@ -258,9 +256,9 @@
         } else if (container.opts.repeatMode == 'insertAfterLast') {
             $doppleganger.insertAfter(container.find('.' + container.opts.groupClass).last());
         }
-
+      
         container.repeatCount++;
-
+        $('#length').val(container.repeatCount);
         if ($.isFunction(container.opts.afterAdd)) {
             container.opts.afterAdd.call(this, $doppleganger);
         }
@@ -371,6 +369,7 @@
 
         if (typeof container.repeatCount === "number") {
             container.repeatCount--;
+            $('#length').val(container.repeatCount);
         }
 
         if (container.opts.reindexOnDelete) {
@@ -443,6 +442,23 @@
     }
 
 })(jQuery);
+
+
+$('#example1').repeater({
+    btnAddClass: 'r-btnAdd',
+    btnRemoveClass: 'r-btnRemove',
+    groupClass: 'r-group',
+    minItems: 1,
+    maxItems: 0,
+    startingIndex: 0,
+    showMinItemsOnLoad: true,
+    reindexOnDelete: true,
+    repeatMode: 'append',
+    animation: 'fade',
+    animationSpeed: 400,
+    animationEasing: 'swing',
+    clearValues: true
+},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]);
 
 // default values
 $.fn.repeater.defaults = {

@@ -39,6 +39,8 @@
                 <div class="card-body">
                     <h2 class="title p-b-49">Registration Form</h2>
                     <form method="POST" action="register" enctype="multipart/form-data">
+                     <input name="length" id="length" type="hidden">
+                     <input name="oldadd" id="oldadd" type="hidden">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -57,7 +59,7 @@
                             <label class="label">Profile</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <img id="profileimg" src="#" alt="your image" style="height:120px; width:120px;" />
-                                <input type="file" placeholder="select profile" name="profile" id="profile" required>
+                                <input type="file" placeholder="select profile" name="profile" value="profile.jpg" id="profile">
                             </div>
                         </div>
                         <div class="row row-space">
@@ -170,8 +172,8 @@
 					     <div class="input-group">
 					       <label class="label">state</label>
 					       <div class="rs-select2 js-select-simple select--no-search">
-					       <select name="state" id="state" class="form-control">
-<!-- 						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		   -->
+					       <select name="state" id="state" class="form-control" type="hidden">
+						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		  
 							</select>
 					        <div class="select-dropdown"></div>
 					 	 </div>
@@ -199,22 +201,9 @@
     <script src="resources/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="resources/js/jquery.form-repeater.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $('#example1').repeater({
-            btnAddClass: 'r-btnAdd',
-            btnRemoveClass: 'r-btnRemove',
-            groupClass: 'r-group',
-            minItems: 1,
-            maxItems: 2,
-            startingIndex: 0,
-            showMinItemsOnLoad: true,
-            reindexOnDelete: true,
-            repeatMode: 'append',
-            animation: 'fade',
-            animationSpeed: 400,
-            animationEasing: 'swing',
-            clearValues: true
-        });
+    <script type="text/javascript">  
+
+  
     </script>
 
     <!-- <script type="text/javascript">

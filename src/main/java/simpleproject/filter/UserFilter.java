@@ -28,12 +28,26 @@ public class UserFilter implements Filter {
 	
 		
 		if(url.equals("/SimpleProject/register")) {		
-			System.out.println("hello");
+			int length=Integer.parseInt(req.getParameter("length"));
+			System.out.println(req.getParameter("state"));
+			System.out.println(req.getParameter("country"));
+			length+=1;
+			String[] address = new String[length];
+			for (int i = 0; i < address.length; i++) {
+				String addressname="address["+i+"][name]";
+				String add=req.getParameter(addressname);				
+					address[i]=add;
+					System.out.println("address is"+i+":"+address[i]);						
+			}	
 		    	//chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/checkuser")) {			
 	    	chain.doFilter(req, resp);
-	}
+		}
+		if(url.equals("/SimpleProject/hello")) {	
+			
+	    	chain.doFilter(req, resp);
+		}
 		if(url.equals("/SimpleProject/useraddress")) {			
 	    	chain.doFilter(req, resp);
 		}

@@ -31,7 +31,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 		      while(rs.next()){  
 		    	    user_id=rs.getInt("user_id");
 		      }
-			for (int i = 0; address[i] != null; i++) {
+			for (int i = 0; i < address.length;  i++) {
 				 ps=con.prepareStatement("insert into user_address(user_id,address) values(?,?)");
 				  ps.setInt(1,user_id);
 				  ps.setString(2,address[i]);

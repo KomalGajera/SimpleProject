@@ -258,11 +258,16 @@ public class UserController extends HttpServlet {
 			for (int i = 0; i < lang.length; i++) {
 				hobby += lang[i] + " ";
 			}
-			String[] address = new String[3];
-			address[0] = req.getParameter("address[0][name]");
-			address[1] = req.getParameter("address[1][name]");
-			address[2] = req.getParameter("address[2][name]");	
 			
+			int length=Integer.parseInt(req.getParameter("length"));
+			length+=1;
+			String[] address = new String[length];
+			for (int i = 0; i < address.length; i++) {
+				String addressname="address["+i+"][name]";
+				String add=req.getParameter(addressname);				
+					address[i]=add;
+					System.out.println("address is"+i+":"+address[i]);						
+			}					
 			user.setFname(req.getParameter("fname"));
 			user.setLname(req.getParameter("lname"));
 			user.setEmail(req.getParameter("email"));

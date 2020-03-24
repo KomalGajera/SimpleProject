@@ -191,7 +191,7 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 		
 		clones.push(clone);
 		normalizeClone(clone, clones.length);
-		
+		$('#length').val(clones.length);
 		dynamiseSubClones(clone);
 	}
 	/**
@@ -435,6 +435,8 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 		
 		/* Handle click on minus */
 		minus.click(outerClickOnMinus);
+		
+		$('#length').val(clones.length);
 	}
 	
 	$.extend( source, {

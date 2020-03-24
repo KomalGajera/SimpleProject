@@ -1,28 +1,58 @@
 (function($) {
 	'use strict';
-	
-	$('#regis').on('click', function () {
-		 alert(hello);
-		});
 	var table = $("#example");
 	var id = getUrlVars()["id"];	
 	if(id!=undefined)
-		{
+		{		
 		
+		
+
+		$.ajax({url: "displaycountry",type:'POST',
+	        success: function(list){      	        	
+	            var select = $('#country');           
+	              $.each(list, function(index, value) {
+	              $('<option>').val(value['country_name']).text(value['country_name']).appendTo(select);
+	          });
+	        },
+	        error: function(data) {
+	            alert('woops!');
+	        } 
+		});
+		
+		
+		 $("#country").change(function(){
+	    	 var country_name=$( "#country option:selected" ).text();    	 
+	    		$.ajax({url: "displaystate",type:'POST',data:'country='+country_name,	    			
+	    	        success: function(list){      	        	
+	    	            var select = $('#state');
+	    	             select.find('option').remove();
+	    	              $.each(list, function(index, value) {
+	    	              $('<option>').val(value['state_name']).text(value['state_name']).appendTo(select);
+	    	          });
+	    	        },
+	    	        error: function(data) {
+	    	            alert('woops!');
+	    	        } 
+	    		});
+	    	
+	    });
+
 		$.ajax({url: "userbyid",type:'POST',data:"id="+id,
-	        success: function(data){      	        	        
+	        success: function(data){   
+	        	var select = $('#state'); 
 	        	var abc=JSON.stringify(data);
             	var value = JSON.parse(abc);
-            	alert(abc);
             	$('#fname').val(value.fname);
             	$('#lname').val(value.lname);
             	$('#email').val(value.email);
+            	
             	$('#contact_no').val(value.number);
             	$('#psw').val(value.password);
             	$('#psw_confirm').val(value.password);
             	$('#birthdate').val(value.dob);
             	$('#country').val(value.country);
-            	$('#state').val(value.state);
+//            	$('#state').text(value.state);
+            	$('<option selected="selected">').val(value.state).text(value.state).appendTo(select);
             	$('#profileimg').attr('src',"image?name="+value.fname+"");
             	if(value.gender=='female')
             	{
@@ -38,6 +68,7 @@
             			   return this.value === hobby;
             			}).prop('checked', true);
             	});
+            	$(this).address(value.id); 
             	
 	        },
 	        error: function(data) {
@@ -45,6 +76,29 @@
 	        } 
 		});
 	}
+	 $.fn.address = function(paramater) {
+		 var add1=[];
+		 var i=0;
+		 $.ajax({
+ 	        url: 'useraddress',
+ 	        type: "POST",
+ 	        data:"id="+paramater,
+ 	        success: function (address) { 
+            	$.each(address, function (key, value) {            		
+            		var a="{'address["+i+"][name]':'"+value.add+"'}";
+            		add1.push(a);
+            		i++;                	
+                }); 
+            	$('#oldadd').val("["+add1+"]");
+            	$.session.set("add", add1);
+            	var abc=$('#oldadd').val();
+            	console.log(abc);
+ 	        },
+	        error: function(data) {
+	            alert('woops!');
+	        } 
+ 	    });
+	 };   
 	
 	$.ajax({url: "displaycountry",type:'POST',
         success: function(list){      	        	
@@ -56,6 +110,9 @@
         error: function(data) {
             alert('woops!');
         } 
+	});
+	$('input[type="submit"]').click(function(){
+		alert('hello');
 	});
 	
 	$("#email").blur(function(){			
@@ -185,6 +242,8 @@
 	var numItems = $('.yourclass').length
 	alert("hello");
 }*/
+
+
 function getUrlVars()
 {
     var vars = [], hash;

@@ -56,6 +56,11 @@
  <url-pattern>/displayuser</url-pattern>  
   </servlet-mapping>
   
+   <servlet-mapping>
+  <servlet-name>s1</servlet-name>
+ <url-pattern>/hello</url-pattern>  
+  </servlet-mapping>
+  
   <servlet-mapping>
   <servlet-name>s1</servlet-name>
  <url-pattern>/useraddress</url-pattern>  

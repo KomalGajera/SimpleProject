@@ -18,7 +18,8 @@
 <body>
     <div class="container">
        
-        <form method="POST">
+        <form method="POST" action="hello">
+        <input name="length" id="length" type="hidden">
         <div class="hello">        
 	        <div class="form-group" id="dynamic_form">
                 <div class="row">	               
@@ -45,12 +46,13 @@
 		    });
         	
 		    $("#dynamic_form #minus5").on('click', function(){
-		    	var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length;
+		    	var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length;		    	
 		    	if (initDynamicId === 2) {
 		    		$(this).closest('#dynamic_form').next().find('#minus5').hide();
 		    	}
 		    	$(this).closest('#dynamic_form').remove();
 		    });
+		   
 
 		   /*  $('form').on('submit', function(event){
 	        	var values = {};
