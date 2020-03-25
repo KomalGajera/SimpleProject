@@ -39,7 +39,7 @@ public class UserFilter implements Filter {
 					address[i]=add;
 					System.out.println("address is"+i+":"+address[i]);						
 			}	
-		    	//chain.doFilter(req, resp);
+		    chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/checkuser")) {			
 	    	chain.doFilter(req, resp);

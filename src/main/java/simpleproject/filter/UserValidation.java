@@ -21,7 +21,6 @@ public class UserValidation implements Filter{
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
@@ -30,7 +29,7 @@ public class UserValidation implements Filter{
 		String url = requestTemp.getRequestURI();		
 		System.out.println(url);
 				
-		if(url.equals("/SimpleProject/login")) {
+		if(url.equals("/SimpleProject/register")) {
 			String fname = req.getParameter("fname");			
 			String lname = req.getParameter("lname");
 			String email = req.getParameter("email");
@@ -52,9 +51,7 @@ public class UserValidation implements Filter{
 		    else {
 		    	chain.doFilter(req, resp);
 		    }
-		}
-		
-		
+		}		
 }
 
 	public static boolean validateName(String txt) 

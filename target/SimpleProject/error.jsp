@@ -13,6 +13,6 @@
 <c:out value="${errormessage}"></c:out>
 </h1>
 
-<a href="login.jsp">Go to Home...</a>
+<a href="Login.jsp">Go to Home...</a>
 </body>
 </html>

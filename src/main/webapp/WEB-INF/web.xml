@@ -21,10 +21,10 @@
   <servlet-name>s1</servlet-name>
   </filter-mapping>
   
-<!--   <filter-mapping>
+ <filter-mapping>
   <filter-name>f2</filter-name>
-  <servlet-name>s2</servlet-name>
-  </filter-mapping> -->
+  <url-pattern>/register</url-pattern>
+  </filter-mapping> 
   
   
   

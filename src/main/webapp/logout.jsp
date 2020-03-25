@@ -11,14 +11,6 @@
 <body>
 <c:remove var="username" scope="session"/>
 <c:remove var="user" scope="session"/>
-<%
-response.setHeader("Cache-Control","no-cache");
-response.setHeader("Cache-Control","no-store");
-response.setHeader("Pragma","no-cache");
-response.setDateHeader ("Expires", 0);
-
-if(session.getAttribute("username")==null)
-    response.sendRedirect("Login.jsp");
-%>
+<c:redirect url="Login.jsp"></c:redirect>
 </body>
 </html>

@@ -158,8 +158,7 @@ public class UserController extends HttpServlet {
 			}
 			else {
 				statelist = userstates.getAllRecordsByName(userstate);
-			}
-			
+			}			
 			json = new Gson().toJson(statelist);
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
@@ -267,7 +266,8 @@ public class UserController extends HttpServlet {
 				String add=req.getParameter(addressname);				
 					address[i]=add;
 					System.out.println("address is"+i+":"+address[i]);						
-			}					
+			}	
+			user.setId(Integer.parseInt(req.getParameter("user_id")));
 			user.setFname(req.getParameter("fname"));
 			user.setLname(req.getParameter("lname"));
 			user.setEmail(req.getParameter("email"));

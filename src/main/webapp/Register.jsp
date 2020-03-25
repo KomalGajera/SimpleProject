@@ -14,9 +14,7 @@
 
     <!-- Title Page-->
     <title>Login form</title>
-
     <!-- Icons font CSS-->
-
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
@@ -37,8 +35,9 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title p-b-49">Registration Form</h2>
+                    <h2 class="title p-b-49" id="title">Registration Form</h2>
                     <form method="POST" action="register" enctype="multipart/form-data">
+                     <input id="user_id" name="user_id" value="0" type="hidden">
                      <input name="length" id="length" type="hidden">
                      <input name="oldadd" id="oldadd" type="hidden">
                         <div class="row row-space">
@@ -137,7 +136,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="example1">
                             <button type="button" class="r-btnAdd btn btn btn--radius-2 btn--green ">Add
 								+</button>
@@ -191,7 +189,7 @@
 
     <!-- Jquery JS-->
     <script src="resources/vendor/jquery/jquery.min.js"></script>
-<!--     <script src="resources/js/validation.js"></script> -->
+   <!--  <script src="resources/js/validation.js"></script> -->
     <!-- Vendor JS-->
     <script src="resources/vendor/select2/select2.min.js"></script>
     <script src="resources/vendor/daterangepicker/moment.min.js"></script>

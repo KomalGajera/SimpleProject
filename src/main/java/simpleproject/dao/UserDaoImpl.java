@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     		  ps.setLong(9,u.getNumber());
     		  ps.setString(10, u.getHobby());
     		  ps.setString(11, u.getDob());
-    		  ps.setInt(11, u.getId());
+    		  ps.setInt(12, u.getId());
     		  status=ps.executeUpdate();  
           }
           else            // means no record available (i.e. insert a record)

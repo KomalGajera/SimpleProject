@@ -2,11 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+
+if(session.getAttribute("username")==null)
+    response.sendRedirect("Login.jsp");
+%>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-lg" id="menu">
  <input type="hidden" id="user" name="user" value="${sessionScope.user}">
- <c:if test="${sessionScope.username==null}">
-<c:redirect url="Login.jsp"></c:redirect>
-</c:if> 
+
 <a class="navbar-brand" href="#">welcome:${sessionScope.username}</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

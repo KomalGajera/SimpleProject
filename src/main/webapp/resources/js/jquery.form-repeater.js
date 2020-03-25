@@ -60,6 +60,10 @@
  */
 (function($) {
 	
+
+	
+
+	
     $.fn.repeater = function(options, data) {
         var $container = $(this),
             $btnAdd, $btnRemove, patternName, patternId, patternText,
@@ -89,7 +93,7 @@
             $btnRemove.appendTo($container);
         } else {
             // default hidden
-            $btnRemove.hide();
+//            $btnRemove.hide();
         }
 
         // narrow the group down to the first copy
@@ -204,6 +208,9 @@
                 // shows removal buttons only inside the new clone when were above the minItems count
                 if ($container.repeatCount > $container.opts.minItems - 1) {
                     $newClone.find('.' + $container.opts.btnRemoveClass).show();
+                }
+                if ($container.repeatCount <= $container.opts.minItems - 1) {
+                	 $btnRemove.hide();
                 }
 
                 if ($.isFunction($container.opts.afterAdd)) {

@@ -3,10 +3,7 @@
 	var table = $("#example");
 	var id = getUrlVars()["id"];	
 	if(id!=undefined)
-		{		
-		
-		
-
+		{	
 		$.ajax({url: "displaycountry",type:'POST',
 	        success: function(list){      	        	
 	            var select = $('#country');           
@@ -18,8 +15,7 @@
 	            alert('woops!');
 	        } 
 		});
-		
-		
+			
 		 $("#country").change(function(){
 	    	 var country_name=$( "#country option:selected" ).text();    	 
 	    		$.ajax({url: "displaystate",type:'POST',data:'country='+country_name,	    			
@@ -42,10 +38,11 @@
 	        	var select = $('#state'); 
 	        	var abc=JSON.stringify(data);
             	var value = JSON.parse(abc);
+            	$('#user_id').val(id);
             	$('#fname').val(value.fname);
             	$('#lname').val(value.lname);
             	$('#email').val(value.email);
-            	
+            	$('h2').text("Updation Form");
             	$('#contact_no').val(value.number);
             	$('#psw').val(value.password);
             	$('#psw_confirm').val(value.password);
