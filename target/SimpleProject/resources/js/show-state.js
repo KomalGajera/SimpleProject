@@ -13,29 +13,42 @@ $(document).ready(function() {
                 table.append("<tr><td>"+value.state_id+"</td>" +
                 		"<td>"+value.country_name+"</td>"+
                 		"<td>"+value.state_name+"</td>"+
-                		"<td><a href='#' onClick='update("+value.state_id+")'>update</a></td>"+
-                    "<td><a href='statedelete?id="+value.state_id+"'>delete</a></td></tr>");
+                		"<td><a href='#' onClick='$(this).update("+value.state_id+")'>update</a></td>"+
+                    "<td><a href='#' onClick='$(this).deletestate("+value.state_id+")'>delete</a></td></tr>");
             }); 
             $("#example").DataTable();
         }
     });
     
-    $.myjQuery = function(paramater) {
+    $.fn.update = function(paramater) {
     	$.ajax({    		
             url: 'stateupdate',data:"id="+paramater,
             type: "GET",
             success: function (data) {
             	$('#main_stateid').show();
             	var abc=JSON.stringify(data);
-            	alert(abc);
             	var obj = JSON.parse(abc);
             	$("#selectcountry").val(obj.country_name);
-            	$("#state").val(obj.state_name); 	  
-            	$("#state_id").val(obj.state_id).attr('readonly', true); 
+            	$(".form-group #state").val(obj.state_name); 	
+            	alert(obj.state_name);
+            	$("#state_id").val(obj.state_id).attr('readonly', true);             	
         }
         }); 
      };
-	
+     
+     $.fn.deletestate = function(paramater) {
+     	$.ajax({    		
+             url: 'statedelete',data:"id="+paramater,
+             type: "GET",
+             success: function (data) {
+            	 window.location.reload(); 
+         },
+     	error: function(data) {
+            alert('woops!');
+        } 
+         }); 
+      };
+     
 	$.ajax({url: "displaycountry",type:'POST',
         success: function(list){      	        	
             var select = $('#selectcountry');           
@@ -50,8 +63,3 @@ $(document).ready(function() {
 });
 
 
-function update(paramater)
-{
-	$.myjQuery(paramater);
-	
-}

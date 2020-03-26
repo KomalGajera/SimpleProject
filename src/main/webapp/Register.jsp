@@ -57,7 +57,7 @@
                         <div class="input-group">
                             <label class="label">Profile</label>
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <img id="profileimg" src="#" alt="your image" style="height:120px; width:120px;" />
+                                <img id="profileimg" src="resources/images/profile.jpg" alt="your image" style="height:120px; width:120px;" />
                                 <input type="file" placeholder="select profile" name="profile" value="profile.jpg" id="profile">
                             </div>
                         </div>

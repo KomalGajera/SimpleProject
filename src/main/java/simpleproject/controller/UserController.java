@@ -95,32 +95,23 @@ public class UserController extends HttpServlet {
 		if(url.equals("/SimpleProject/statedelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userstates.delete(id);
-			if(status==1) {
-				req.getRequestDispatcher("/addstate.jsp").forward(req, resp);
-			}else {
-				req.setAttribute("errormessage","There is some error in insert country...");   
-		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
-			}	
+			json = new Gson().toJson(status);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);		
 		}
 		if(url.equals("/SimpleProject/userdelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userservice.delete(id);
-			if(status==1) {
-				req.getRequestDispatcher("/user.jsp").forward(req, resp);
-			}else {
-				req.setAttribute("errormessage","There is some error in insert country...");   
-		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
-			}	
+			json = new Gson().toJson(status);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);
 		}
 		if(url.equals("/SimpleProject/countrydelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userCountrys.delete(id);	
-			if(status==1) {
-				req.getRequestDispatcher("/addcountry.jsp").forward(req, resp);
-			}else {
-				req.setAttribute("errormessage","There is some error in insert country...");   
-		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
-			}	
+			json = new Gson().toJson(status);
+			resp.setContentType("application/json");
+            resp.getWriter().write(json);	
 		}
 		if (url.equals("/SimpleProject/displayuser")) {
 			List<User> list = userservice.getAllRecords();
@@ -169,7 +160,7 @@ public class UserController extends HttpServlet {
 			usercountry.setCountry_name(req.getParameter("country"));
 			int status=userCountrys.save(usercountry);
 			if(status==1) {
-				req.getRequestDispatcher("/addcountry.jsp").forward(req, resp);
+				resp.sendRedirect("addcountry.jsp");
 			}else {
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
@@ -181,7 +172,7 @@ public class UserController extends HttpServlet {
 			userstate.setCountry_name(req.getParameter("selectcountry"));
 			int status=userstates.save(userstate);
 			if(status==1) {
-				req.getRequestDispatcher("/addstate.jsp").forward(req, resp);
+				resp.sendRedirect("addstate.jsp");
 			}else {
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
@@ -208,7 +199,7 @@ public class UserController extends HttpServlet {
 					session.setAttribute("userid", user.getId());
 					session.setAttribute("username",user.getFname());
 					session.setMaxInactiveInterval(3000);
-					resp.sendRedirect("index.jsp");
+					resp.sendRedirect("user.jsp");
 				}
 				else
 				{
@@ -217,7 +208,7 @@ public class UserController extends HttpServlet {
 					session.setAttribute("username",user.getFname());
 					System.out.println(session.getAttribute("normaluser"));
 					session.setMaxInactiveInterval(3000);
-					resp.sendRedirect("index.jsp");
+					resp.sendRedirect("user.jsp");
 				}						
 			}
 			else {

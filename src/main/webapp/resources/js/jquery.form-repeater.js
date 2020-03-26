@@ -60,10 +60,6 @@
  */
 (function($) {
 	
-
-	
-
-	
     $.fn.repeater = function(options, data) {
         var $container = $(this),
             $btnAdd, $btnRemove, patternName, patternId, patternText,
@@ -93,7 +89,7 @@
             $btnRemove.appendTo($container);
         } else {
             // default hidden
-//            $btnRemove.hide();
+//           $btnRemove.hide();
         }
 
         // narrow the group down to the first copy
@@ -209,9 +205,8 @@
                 if ($container.repeatCount > $container.opts.minItems - 1) {
                     $newClone.find('.' + $container.opts.btnRemoveClass).show();
                 }
-                if ($container.repeatCount <= $container.opts.minItems - 1) {
-                	 $btnRemove.hide();
-                }
+              
+               
 
                 if ($.isFunction($container.opts.afterAdd)) {
                     $container.opts.afterAdd.call(this, $newClone);
@@ -269,7 +264,6 @@
         if ($.isFunction(container.opts.afterAdd)) {
             container.opts.afterAdd.call(this, $doppleganger);
         }
-
         return false;
     }
 
@@ -281,12 +275,10 @@
             container = data.data,
             $repeaters = container.find('.' + container.opts.groupClass),
             numRepeaters = $repeaters.length,
-            $match;
-
+            $match;          
         if (numRepeaters <= container.opts.minItems) {
             return false;
         }
-
         // check if removing a specific repeater instance
         $match = $btn.closest('.' + container.opts.groupClass);
         if (!$match.length) {
@@ -299,7 +291,6 @@
                 var $match = $repeaters.filter(':last');
             }
         }
-
         // ensure we have a match
         if ($match.length) {
             // remove the repeater
@@ -321,16 +312,13 @@
                 _remove($match, container);
             }
         }
-
         return false;
     }
-
     /**
      * Parse the pattern.
      */
     function parsePattern(pattern, replaceText, count, container) {
         var returnVal = replaceText;
-
         count = parseInt(count);
         if (pattern) {
             // check pattern type
@@ -341,14 +329,12 @@
                     returnVal = pattern.replace(/\+=(\d)+/i, container.opts.startingIndex + count + incr);
                 }
             }
-
             if (pattern.indexOf('++') > -1) {
                 returnVal = pattern.replace(/\+\+/gi, container.opts.startingIndex + count);
             }
         }
         return returnVal;
     }
-
     /**
      * Wrapper to handle re-indexing form elements in a group.
      */
@@ -363,7 +349,6 @@
             startIndex++;
         });
     }
-
     /**
      * Remove a match and reindex.
      */
@@ -371,7 +356,6 @@
         if ($.isFunction(container.opts.beforeDelete)) {
             container.opts.beforeDelete.call(this, $match);
         }
-
         $match.remove();
 
         if (typeof container.repeatCount === "number") {

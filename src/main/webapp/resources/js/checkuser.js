@@ -4,7 +4,6 @@ $(document).ready(function() {
 	if(user=='user')
 		{
 		$('#country').hide();
-		$('#state').hide();
-		$('#alluser').hide();
+		$('#state').hide();		
 		}
 });
