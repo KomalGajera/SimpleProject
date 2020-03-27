@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +45,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">first name</label> <input class="input--style-4" type="text" name="fname" value="${fn:escapeXml(param.fname)}" id="fname" onblur=" return fname_valid()" onKeyDown="if(event.keyCode===32) return false;">
-                                    <span id="firstname"><c:out value="${message}"></c:out> </span><br>
+                                    <span id="firstname">${fname}</span><br>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">last name</label> <input class="input--style-4" type="text" name="lname" id="lname" value="${fn:escapeXml(param.lname)}" onblur=" return lname_valid()" onKeyDown="if(event.keyCode===32) return false;">
-                                    <span id="lastname"></span><br>
+                                    <span id="lastname">${lname}</span><br>
                                 </div>
                             </div>
                         </div>
@@ -65,28 +66,28 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label> <input class="input--style-4" type="email" name="email" value="${fn:escapeXml(param.email)}" id="email" onblur=" return email_valid()" onKeyDown="if(event.keyCode===32) return false;">
-                                    <span class="error">${messages}</span>
+                                    <span class="error">${email}</span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label> <input class="input--style-4" type="text" name="number" maxlength="10" value="${fn:escapeXml(param.number)}" name="number" id="contact_no" onKeyDown="if(event.keyCode===32) return false;"
                                         onblur=" return number_valid()">
-                                    <span id="no"></span><br>
+                                    <span id="no">${number}</span><br>
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Password</label> <input class="input--style-4" type="password" name="password" id="psw" onKeyDown="if(event.keyCode===32) return false;">
-
+                                    <label class="label">Password</label> <input class="input--style-4" type="password" name="password" id="psw" value="${fn:escapeXml(param.password)}" onKeyDown="if(event.keyCode===32) return false;">
+ 								<span id="confirm_password">${password}</span><br>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Confirm password</label> <input class="input--style-4" type="password" name="cpassword" id="psw_confirm" onblur=" return confirm_valid()">
-                                    <span id="confirm_password"></span><br>
+                                    <label class="label">Confirm password</label> <input class="input--style-4" type="password" name="cpassword" value="${fn:escapeXml(param.cpassword)}" id="psw_confirm" onblur=" return confirm_valid()">
+                                    <span id="confirm_password">${cpassword}</span><br>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +105,8 @@
                                 <div class="input-group">
                                     <label class="label">Birthday</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate" id="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate" value="${fn:escapeXml(param.birthdate)}" id="birthdate"> <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                   		 <span id="lastname">${Dob}</span><br>
                                     </div>
                                 </div>
                             </div>
@@ -160,19 +162,21 @@
                         </div>
 					  <div class="input-group">
 					       <label class="label">Country</label>
-					       <div class="rs-select2 js-select-simple select--no-search">
+					       <div class="rs-select2 js-select-simple">
 					       <select name="country" id="country" class="form-control">
-<!-- 						   <option disabled="disabled" selected="selected" value="0">Choose Country</option>		   -->
+						   <option disabled="disabled" selected="selected" value="0">Choose Country</option>		  
 							</select>
+							 <span id="lastname">${country}</span><br>
 					        <div class="select-dropdown"></div>
 					 	 </div>
 					   </div>
 					     <div class="input-group">
 					       <label class="label">state</label>
-					       <div class="rs-select2 js-select-simple select--no-search">
+					       <div class="rs-select2 js-select-simple">
 					       <select name="state" id="state" class="form-control" type="hidden">
 						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		  
 							</select>
+							 <span id="lastname">${state}</span><br>
 					        <div class="select-dropdown"></div>
 					 	 </div>
 					   </div>
@@ -205,19 +209,19 @@
     </script>
 
     <!-- <script type="text/javascript">
-function Validate() {
-    var country = document.getElementById("country");
-    var state = document.getElementById("state");
-    if (country.value == "") {
-        //If the "Please Select" option is selected display error.
-        alert("select country");
-    }    
-    if (state.value == "") {
-    	//If the "Please Select" option is selected display error.
-    	 alert("select state");
-   	 	document.getElementById('statemessage').innerHTML = "Please select any state." 
-    }
-}
+	function Validate() {
+	    var country = document.getElementById("country");
+	    var state = document.getElementById("state");
+	    if (country.value == "") {
+	        //If the "Please Select" option is selected display error.
+	        alert("select country");
+	    }    
+	    if (state.value == "") {
+	    	//If the "Please Select" option is selected display error.
+	    	 alert("select state");
+	   	 	document.getElementById('statemessage').innerHTML = "Please select any state." 
+	    }
+	}
 
 </script> -->
 

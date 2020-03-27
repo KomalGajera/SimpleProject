@@ -274,8 +274,9 @@ public class UserController extends HttpServlet {
 			int status = userservice.save(user, inputStream);
 			if (status == 1) {
 				int addressstatus=useraddress.save(user);
-				if(addressstatus==1) {
-					req.getRequestDispatcher("/Login.jsp").forward(req, resp);
+				if(addressstatus==1) {					
+						
+						resp.sendRedirect("Login.jsp");
 				}else {
 					req.setAttribute("errormessage", "sorry there is any error in additing address...");
 					req.getRequestDispatcher("/error.jsp").include(req, resp);

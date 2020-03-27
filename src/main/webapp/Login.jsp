@@ -17,6 +17,11 @@ if(session.getAttribute("username")!=null)
         <title>Login page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript">
+	        function preventBack() { window.history.forward(); }
+	        setTimeout("preventBack()", 0);
+	        window.onunload = function () { null };
+	    </script>
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->

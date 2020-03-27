@@ -58,8 +58,15 @@
 });
  </script>
  */
+
+
+
+
+
+
+
 (function($) {
-	
+		
     $.fn.repeater = function(options, data) {
         var $container = $(this),
             $btnAdd, $btnRemove, patternName, patternId, patternText,
@@ -449,8 +456,8 @@ $('#example1').repeater({
     animationSpeed: 400,
     animationEasing: 'swing',
     clearValues: true
-},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]);
-
+});
+//[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]
 // default values
 $.fn.repeater.defaults = {
     groupClass: 'r-group',

@@ -76,8 +76,6 @@ function address_valid() {
     var count = 0;
     for (i = 0; i < address.length; i++) {
         if (address[i] != ' ') {
-
-
             count++;
         }
     }
@@ -104,15 +102,10 @@ function email_valid() {
     var specialcaseLetter = false;
 
     for (var i = 0; i < email.length; i++) {
-
-
         var charCode = email.charCodeAt(i);
         if (charCode == 64) {
             at++;
         }
-
-
-
         if ((charCode > 32 && charCode < 45) || (charCode > 47 && charCode < 48) || (charCode > 57 && charCode < 63) || (charCode == 65) || (charCode > 90 && charCode < 97) || (charCode > 122 && charCode <= 126))
             specialcaseLetter = true;
     }
@@ -233,9 +226,6 @@ function file_valid() {
         }
     }
 }
-
-
-
 	 var myInput = document.getElementById("psw");
      var letter = document.getElementById("letter");
      var capital = document.getElementById("capital");

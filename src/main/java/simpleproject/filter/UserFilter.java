@@ -82,8 +82,7 @@ public class UserFilter implements Filter {
 		if(url.equals("/SimpleProject/displayuser")) {			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/userbyid")) {
-			
+		if(url.equals("/SimpleProject/userbyid")) {			
 	    	chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/userdelete")) {
