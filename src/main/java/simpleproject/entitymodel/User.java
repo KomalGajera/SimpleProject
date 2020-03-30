@@ -1,5 +1,6 @@
 package simpleproject.entitymodel;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class User {
@@ -10,6 +11,7 @@ public class User {
 	private byte[] imageData;
 	private String imageFileName;
 	private List<User> aaData;
+	private InputStream image;
 
 	public int getId() {
 		return id;
@@ -145,6 +147,14 @@ public class User {
 
 	public void setAdd(String add) {
 		this.add = add;
+	}
+
+	public InputStream getImage() {
+		return image;
+	}
+
+	public void setImage(InputStream image) {
+		this.image = image;
 	}
 
 }

@@ -63,9 +63,15 @@
 
 
 
+window.onload = function() {
+	alert("hello");
+	var abc=$('#oldadd').val();
+	console.log(abc);
+};
 
 
 (function($) {
+	
 		
     $.fn.repeater = function(options, data) {
         var $container = $(this),

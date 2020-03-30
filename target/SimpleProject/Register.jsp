@@ -32,6 +32,11 @@
 </head>
 
 <body>
+ 	<script type="text/javascript">
+	        function preventBack() { window.history.forward(); }
+	        setTimeout("preventBack()", 0);
+	        window.onunload = function () { null };
+	    </script>
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
@@ -39,8 +44,8 @@
                     <h2 class="title p-b-49" id="title">Registration Form</h2>
                     <form method="POST" action="register" enctype="multipart/form-data">
                      <input id="user_id" name="user_id" value="0" type="hidden">
-                     <input name="length" id="length" type="hidden">
-                     <input name="oldadd" id="oldadd" type="hidden">
+                     <input name="length" id="length" type="hidden" >
+                     <input name="oldadd" id="oldadd" value="{'address[0][name]':'enter address'},{'address[1][name]':'enter address'}" type="hidden">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -59,13 +64,13 @@
                             <label class="label">Profile</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <img id="profileimg" src="resources/images/profile.jpg" alt="your image" style="height:120px; width:120px;" />
-                                <input type="file" placeholder="select profile" name="profile" value="profile.jpg" id="profile">
+                                <input type="file" placeholder="select profile" name="profile" id="profile">
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Email</label> <input class="input--style-4" type="email" name="email" value="${fn:escapeXml(param.email)}" id="email" onblur=" return email_valid()" onKeyDown="if(event.keyCode===32) return false;">
+                                    <label class="label">Email</label> <input class="input--style-4" type="email" name="email" value="${fn:escapeXml(param.email)}" id="email" onblur="return email_valid()" onKeyDown="if(event.keyCode===32) return false;">
                                     <span class="error">${email}</span>
                                 </div>
                             </div>
@@ -147,7 +152,7 @@
                                         <div class="input-group">
                                             <label class="label">address</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <textarea class="input--style-4" type="text" rows="4" placeholder="Enter address" name="address[0][name]" id="address_0_name" data-pattern-name="address[++][name]" data-pattern-id="address_++_name" value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
+                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address" data-pattern-name="address[++][name]" data-pattern-id="address" value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
                                                 <span id="addr"></span><br>
                                             </div>
                                         </div>
@@ -183,7 +188,7 @@
                         <span id="countrymessage"> </span><br>
                         <span id="statemessage"> </span><br>
                         <div class="p-t-15">
-                            <button id="regis" class="btn btn--radius-2 btn--blue" type="submit" onclick="return Validate()">Submit</button>
+                            <button id="regis" class="btn btn--radius-2 btn--blue" type="submit" onclick="return valid()">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -193,7 +198,8 @@
 
     <!-- Jquery JS-->
     <script src="resources/vendor/jquery/jquery.min.js"></script>
-   <!--  <script src="resources/js/validation.js"></script> -->
+    <script src="resources/js/validation.js"></script>
+     <script src="resources/js/allvalidation.js"></script>
     <!-- Vendor JS-->
     <script src="resources/vendor/select2/select2.min.js"></script>
     <script src="resources/vendor/daterangepicker/moment.min.js"></script>
@@ -202,7 +208,7 @@
     <!-- Main JS-->
     <script src="resources/js/custom.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="resources/js/jquery.form-repeater.js" type="text/javascript"></script>
+<!--     <script src="resources/js/jquery.form-repeater.js" type="text/javascript"></script> -->
     <script type="text/javascript">  
 
   

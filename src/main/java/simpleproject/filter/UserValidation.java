@@ -29,7 +29,23 @@ public class UserValidation implements Filter{
 		HttpServletRequest requestTemp = (HttpServletRequest) req; 
 		String url = requestTemp.getRequestURI();		
 		System.out.println(url);
-				
+			
+		if (url.equals("/SimpleProject/changepassword")) {
+			boolean password = validatePassword(req.getParameter("password"));
+			boolean cpassword =validateCpassword(req.getParameter("password"),req.getParameter("cpassword"));
+			  if(password == false) {
+			    	req.setAttribute("password", "Please enter maximum 8 character of password with atleast(one capital letter,one small letter,one digit,and one special character)");
+			    	req.getRequestDispatcher("/forgetpassword.jsp").forward(req, resp);
+			    }
+			    else if(cpassword == false) {
+			    	req.setAttribute("cpassword", "passsword does not match.");
+			    	req.getRequestDispatcher("/forgetpassword.jsp").forward(req, resp);
+			    }
+			    else {
+			    	chain.doFilter(req, resp);
+			    }						
+		}
+		
 		if(url.equals("/SimpleProject/register")) {
 			boolean fname =validateName(req.getParameter("fname"));	
 			boolean lname = validateName(req.getParameter("lname"));

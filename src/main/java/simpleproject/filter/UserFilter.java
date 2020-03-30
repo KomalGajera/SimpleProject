@@ -72,8 +72,7 @@ public class UserFilter implements Filter {
 		if(url.equals("/SimpleProject/countrydelete")) {
 			chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/stateadd")) {
-			
+		if(url.equals("/SimpleProject/stateadd")) {			
 	    	chain.doFilter(req, resp);
 		}
 		if(url.equals("/SimpleProject/login")) {			
@@ -85,16 +84,13 @@ public class UserFilter implements Filter {
 		if(url.equals("/SimpleProject/userbyid")) {			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/userdelete")) {
-			
+		if(url.equals("/SimpleProject/userdelete")) {			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/changepassword")) {
-			
+		if(url.equals("/SimpleProject/changepassword")) {			
 	    	chain.doFilter(req, resp);
 		}
-		if(url.equals("/SimpleProject/displaycountry")) {
-			
+		if(url.equals("/SimpleProject/displaycountry")) {			
 	    	chain.doFilter(req, resp);
 		}
 	}

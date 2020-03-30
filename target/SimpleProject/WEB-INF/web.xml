@@ -26,7 +26,10 @@
   <url-pattern>/register</url-pattern>
   </filter-mapping> 
   
-  
+   <filter-mapping>
+  <filter-name>f2</filter-name>
+  <url-pattern>/changepassword</url-pattern>
+  </filter-mapping> 
   
   <servlet>
   <servlet-name>s1</servlet-name>

@@ -55,29 +55,38 @@ public class UserController extends HttpServlet {
 		HttpSession session = req.getSession();
 		String url = requestTemp.getRequestURI();
 		String json = null;		
+		
+		/*This condition is fetch the country records..*/
 		if (url.equals("/SimpleProject/displaycountry")) {
 			List<UserCountry> list = userCountrys.getAllRecords();
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
+		
+		
+		/*This condition is fetch the user record by id..*/
 		if(url.equals("/SimpleProject/userbyid")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			user=userservice.getRecordById(id);
 			json = new Gson().toJson(user);
 			resp.setContentType("application/json");
-            resp.getWriter().write(json);
-			
+            resp.getWriter().write(json);			
 		}
+		
+		
+		/*This condition is fetch the user address record by id..*/
 		if(url.equals("/SimpleProject/useraddress")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			System.out.println(id);
 			List<User> list=useraddress.getRecordById(id);
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
-            resp.getWriter().write(json);
-			
+            resp.getWriter().write(json);			
 		}
+		
+		
+		/*This condition is fetch the user state record by id..*/
 		if(url.equals("/SimpleProject/stateupdate")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			userstate=userstates.getRecordById(id);
@@ -85,6 +94,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
+		
+		
+		/*This condition is fetch the user country record by id..*/
 		if(url.equals("/SimpleProject/countryupdate")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			usercountry=userCountrys.getRecordById(id);
@@ -92,6 +104,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);
 		}
+		
+		
+		/*This condition is delete particular state detail in list of state..*/
 		if(url.equals("/SimpleProject/statedelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userstates.delete(id);
@@ -99,6 +114,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);		
 		}
+		
+		
+		/*This condition is delete particular user detail and address delete by trigger*/
 		if(url.equals("/SimpleProject/userdelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userservice.delete(id);
@@ -106,6 +124,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);
 		}
+		
+		
+		/*This condition is delete particular country detail and with all state of this country..*/
 		if(url.equals("/SimpleProject/countrydelete")) {
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userCountrys.delete(id);	
@@ -113,12 +134,9 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);	
 		}
-		if (url.equals("/SimpleProject/displayuser")) {
-			List<User> list = userservice.getAllRecords();
-			json = new Gson().toJson(list);
-			resp.setContentType("application/json");
-            resp.getWriter().write(json);			
-		}
+		
+		
+		/*This condition is update new password to particular user...*/
 		if (url.equals("/SimpleProject/changepassword")) {
 			System.out.println("hello");
 			user.setEmail(req.getParameter("email"));
@@ -132,14 +150,19 @@ public class UserController extends HttpServlet {
 			}
 						
 		}
+		
+		
+		/*This condition is fetch the detail of user is exits or not..*/
 		if (url.equals("/SimpleProject/checkemail")) {
 			System.out.println(req.getParameter("email"));			
 			  int status = userservice.usercheck(req.getParameter("email")); 
 			  json = new  Gson().toJson(status); 
 			  resp.setContentType("application/json");
-			  resp.getWriter().write(json);
-			 			
+			  resp.getWriter().write(json);			 			
 		}
+		
+		
+		/*This condition is fetch the state details..*/
 		if (url.equals("/SimpleProject/displaystate")) {
 			userstate.setCountry_name(req.getParameter("country"));
 			List<UserState> statelist = null;
@@ -154,8 +177,10 @@ public class UserController extends HttpServlet {
 			resp.setContentType("application/json");
             resp.getWriter().write(json);			
 		}
-		if (url.equals("/SimpleProject/countryadd")) {	
-			
+		
+		
+		/*This condition is add new country..*/
+		if (url.equals("/SimpleProject/countryadd")) {				
 			usercountry.setCountry_id(Integer.parseInt(req.getParameter("country_id")));
 			usercountry.setCountry_name(req.getParameter("country"));
 			int status=userCountrys.save(usercountry);
@@ -165,7 +190,10 @@ public class UserController extends HttpServlet {
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
 			}		
-		}	
+		}
+		
+		
+		/*This condition is add new state.*/
 		if (url.equals("/SimpleProject/stateadd")) {
 			userstate.setState_id(Integer.parseInt(req.getParameter("state_id")));
 			userstate.setState_name(req.getParameter("state"));
@@ -178,31 +206,30 @@ public class UserController extends HttpServlet {
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
 			}
 		}
-		if(url.equals("/SimpleProject/user")) {
-			System.out.println(req.getParameter("abc"));
+		
+		
+		/*This condition is fetch the all user detail..*/
+		if (url.equals("/SimpleProject/displayuser")) {
+			List<User> list = userservice.getAllRecords();
+			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
-			PrintWriter out = resp.getWriter();
-			List<User> userlist=userservice.getAllRecords();
-			req.setAttribute("userlist",userlist);
-			req.getRequestDispatcher("user.jsp").forward(req, resp);
+            resp.getWriter().write(json);			
 		}
+		
+		
+		/*This condition is check user is valid or not..*/
 		if (url.equals("/SimpleProject/login")) {
 			user.setEmail(req.getParameter("email"));
 			user.setPassword(req.getParameter("password"));
-			int status=userservice.checkuser(user);
-			
-			if(status==1)
-			{
-				if(user.getRole().equals("admin"))
-				{	
+			int status=userservice.checkuser(user);			
+			if(status==1){
+				if(user.getRole().equals("admin")){	
 					session.setAttribute("user", user.getRole());
 					session.setAttribute("userid", user.getId());
 					session.setAttribute("username",user.getFname());
 					session.setMaxInactiveInterval(3000);
 					resp.sendRedirect("user.jsp");
-				}
-				else
-				{
+				}else{
 					session.setAttribute("user", user.getRole());
 					session.setAttribute("userid", user.getId());
 					session.setAttribute("username",user.getFname());
@@ -210,53 +237,49 @@ public class UserController extends HttpServlet {
 					session.setMaxInactiveInterval(3000);
 					resp.sendRedirect("user.jsp");
 				}						
-			}
-			else {
+			}else {
 				req.setAttribute("errormessage","sorry username and password are wrong...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp);  
 			}
 		}
-		if (url.equals("/SimpleProject/register")) {
-
+		
+		
+		
+		/*This condition is store new user record or update existing user records*/
+		if (url.equals("/SimpleProject/register")) {			
 			String name = req.getParameter("profile");
+			System.out.println(name);
 			String path = null;
-			InputStream inputStream = null;
-			String applicationPath = req.getServletContext().getRealPath("");
-			// constructs path of the directory to save uploaded file
-			String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
-			// creates upload folder if it does not exists
-			File uploadFolder = new File(uploadFilePath);
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdirs();
-			}
-
-			Part filePart = req.getPart("profile");
-			if (filePart != null) {
-				String fileName = filePart.getSubmittedFileName();
-				// prints out some information for debugging
-				System.out.println(filePart.getName());
-				System.out.println(filePart.getSize());
-				System.out.println(filePart.getContentType());
-				filePart.write(uploadFilePath + File.separator + fileName);
-				path = uploadFilePath + File.separator + fileName;
-			}
-			File image = new File(path);
-			inputStream = new FileInputStream(image);
-
+			InputStream inputStream = null;			
+				String applicationPath = req.getServletContext().getRealPath("");
+				// constructs path of the directory to save uploaded file
+				String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
+				// creates upload folder if it does not exists
+				File uploadFolder = new File(uploadFilePath);
+				if (!uploadFolder.exists()) {
+					uploadFolder.mkdirs();
+				}
+				Part filePart = req.getPart("profile");
+				if (filePart != null) {
+					String fileName = filePart.getSubmittedFileName();
+					filePart.write(uploadFilePath + File.separator + fileName);
+					path = uploadFilePath + File.separator + fileName;
+				}
+				File image = new File(path);
+				inputStream = new FileInputStream(image);
+				System.out.println(inputStream);
 			String hobby = "";
 			String lang[] = req.getParameterValues("hobby");
 			for (int i = 0; i < lang.length; i++) {
 				hobby += lang[i] + " ";
-			}
-			
+			}		
 			int length=Integer.parseInt(req.getParameter("length"));
 			length+=1;
 			String[] address = new String[length];
 			for (int i = 0; i < address.length; i++) {
 				String addressname="address["+i+"][name]";
 				String add=req.getParameter(addressname);				
-					address[i]=add;
-					System.out.println("address is"+i+":"+address[i]);						
+					address[i]=add;											
 			}	
 			user.setId(Integer.parseInt(req.getParameter("user_id")));
 			user.setFname(req.getParameter("fname"));
@@ -269,13 +292,11 @@ public class UserController extends HttpServlet {
 			user.setCountry(req.getParameter("country"));
 			user.setState(req.getParameter("state"));
 			user.setAddress(address);
-			user.setDob(req.getParameter("birthdate"));
-			
+			user.setDob(req.getParameter("birthdate"));			
 			int status = userservice.save(user, inputStream);
 			if (status == 1) {
 				int addressstatus=useraddress.save(user);
-				if(addressstatus==1) {					
-						
+				if(addressstatus==1) {							
 						resp.sendRedirect("Login.jsp");
 				}else {
 					req.setAttribute("errormessage", "sorry there is any error in additing address...");

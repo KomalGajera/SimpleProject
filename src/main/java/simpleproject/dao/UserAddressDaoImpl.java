@@ -1,6 +1,5 @@
 package simpleproject.dao;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,6 @@ import java.util.List;
 
 import simpleproject.db.DatabaseConnection;
 import simpleproject.entitymodel.User;
-import simpleproject.entitymodel.UserCountry;
 
 public class UserAddressDaoImpl implements UserAddressDao {
 	
@@ -25,27 +23,39 @@ public class UserAddressDaoImpl implements UserAddressDao {
 		int status=0; 
 		int user_id=0;
 		String address[]=u.getAddress();
+		List<String> oldaddress=new ArrayList<String>(); 
+		List<String> newaddress=new ArrayList<String>();
 		ResultSet rs,rs1;
-		 try{ 
+		 try{ 		
 		      PreparedStatement ps;
-		      ps = con.prepareStatement("select * from user_address where User_id=?");
+		      ps = con.prepareStatement("select * from user_address where user_id=?");
 	          ps.setInt(1,u.getId());
 	          rs = ps.executeQuery();
 	          if(rs.next()) // means record is already available (i.e. Update record)
-	          {	        	 
-	        	  ps=con.prepareStatement("select user_id from user_detail where email=?");
-			      ps.setString(1, u.getEmail());
-			      rs1=ps.executeQuery();  
-			      while(rs1.next()){  
-			    	    user_id=rs.getInt("user_id");
-			      }
-			      for (int i = 0; i < address.length;  i++) {
-					 ps=con.prepareStatement("update user_address set user_id=?,address=? where address_id=?");
-					  ps.setInt(1,user_id);
-					  ps.setString(2,address[i]);
-					  ps.setString(3,rs.getString("address_id"));
-					  status=ps.executeUpdate(); 				
-			      }
+	          {	 
+	        	  oldaddress.add(rs.getString("address"));
+	        	  while(rs.next()) {
+	        	  oldaddress.add(rs.getString("address"));
+	        	  }
+	        	  for (int i = 0; i < address.length;  i++) {
+						newaddress.add(address[i]);				
+				  }
+	        	  List<String> oldaddress1=new ArrayList<String>(oldaddress); 
+	        	  oldaddress.removeAll(newaddress); 
+	        	  newaddress.removeAll(oldaddress1);
+	        	  for (String old : oldaddress) { 
+	        		  ps=con.prepareStatement("Delete from user_address where user_id=? and address=?");
+				      ps.setInt(1, u.getId());
+				      ps.setString(2, old);
+				      status=ps.executeUpdate(); 			      
+	        	  }
+		          for (String newa : newaddress) {
+		        	  ps=con.prepareStatement("insert into user_address(user_id,address) values(?,?)");
+					  ps.setInt(1, u.getId());
+					  ps.setString(2,newa);
+					  status=ps.executeUpdate(); 
+		          }	 
+		          status=1;
 	          }
 	          else            // means no record available (i.e. insert a record)
 	          {	        	 
@@ -61,7 +71,8 @@ public class UserAddressDaoImpl implements UserAddressDao {
 					  ps.setString(2,address[i]);
 					  status=ps.executeUpdate(); 				
 			      }
-	         }		
+	         }	
+	         
 		     
 	}catch(Exception e){System.out.println(e);}
 		return status;

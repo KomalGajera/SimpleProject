@@ -1,8 +1,6 @@
+
 function fname_valid() {
-
     var fname = document.getElementById('fname').value;
-
-
     var number = false;
     var specialcaseLetter = false;
 
@@ -19,7 +17,7 @@ function fname_valid() {
     if (fname == "") {
         document.getElementById('firstname').innerHTML = "Please enter the firstname"
         return false;
-    } else if ((fname.length < 2) || (fname.length > 20)) {
+    } else if ((fname.length < 2) || (fname.length > 15)) {
         document.getElementById('firstname').innerHTML = "Please enter the username length between 2 to 20"
         return false;
     } else if (number) {
@@ -54,7 +52,7 @@ function lname_valid() {
     if (lname == "") {
         document.getElementById('lastname').innerHTML = "Please enter the lastname"
         return false;
-    } else if ((lname.length < 2) || (lname.length > 20)) {
+    } else if ((lname.length < 2) || (lname.length > 15)) {
         document.getElementById('lastname').innerHTML = "Please enter the username length between 2 to 20"
         return false;
     } else if (number) {
@@ -70,7 +68,7 @@ function lname_valid() {
 }
 
 function address_valid() {
-    var address = document.getElementById('address_0_name').value;
+    var address = document.getElementById('address').value;
 
     var i;
     var count = 0;
@@ -83,7 +81,7 @@ function address_valid() {
     if (address == "") {
         document.getElementById('addr').innerHTML = "Please enter the address"
         return false;
-    } else if ((count < 30) || (count > 50)) {
+    } else if ((count < 30)) {
         document.getElementById('addr').innerHTML = "address should be in 30 to 50 chrecter"
         return false;
     } else {
@@ -95,7 +93,6 @@ function address_valid() {
 function email_valid() {
     var email = document.getElementById('email').value;
     var em = email.split('@');
-
     var count = 0;
     var count1 = 0;
     var at = 0;

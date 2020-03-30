@@ -42,8 +42,9 @@ public class UserDaoImpl implements UserDao {
           ps.setInt(1,u.getId());
           rs = ps.executeQuery();
           if(rs.next()) // means record is already available (i.e. Update record)
-          {	        	 
-        	  ps=con.prepareStatement("update user_detail set fname=?,lastname=?,profile=?,password=?,gender=?,country_id=?,state_id=?,email=?,phone_no=?,hobby=?,birthdate=? where user_id=? ");
+          {	 
+        	 
+        	 ps=con.prepareStatement("update user_detail set fname=?,lastname=?,profile=?,password=?,gender=?,country_id=?,state_id=?,email=?,phone_no=?,hobby=?,birthdate=? where user_id=? ");
     		  ps.setString(1,u.getFname());
     		  ps.setString(2,u.getLname());
     		  ps.setBinaryStream(3,(InputStream) inputStream); 
@@ -132,7 +133,6 @@ public class UserDaoImpl implements UserDao {
 	            u.setRole(rs.getString("role"));
 	            u.setCountry(rs.getString("country_name"));
 	            u.setState(rs.getString("state_name"));	
-	            System.out.print(rs.getLong("phone_no"));
 	         }  
 	    }catch(Exception e){System.out.println(e);}
 	    return u;  
@@ -172,7 +172,7 @@ public class UserDaoImpl implements UserDao {
 			  ps.setString(1, name);
 		      ResultSet rs = ps.executeQuery();
 		      if (rs.next()) {
-		         System.out.println("record find..");
+		       
 		          byte[] imageData = rs.getBytes("profile");
 		          String imageFileName = rs.getString("fname");
 		          u.setImageFileName(imageFileName);
