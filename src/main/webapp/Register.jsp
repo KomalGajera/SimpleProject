@@ -45,7 +45,7 @@
                     <form method="POST" action="register" enctype="multipart/form-data">
                      <input id="user_id" name="user_id" value="0" type="hidden">
                      <input name="length" id="length" type="hidden" >
-                     <input name="oldadd" id="oldadd" value="{'address[0][name]':'enter address'},{'address[1][name]':'enter address'}" type="hidden">
+                     <input name="oldadd" id="oldadd" type="hidden">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -152,7 +152,7 @@
                                         <div class="input-group">
                                             <label class="label">address</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address" data-pattern-name="address[++][name]" data-pattern-id="address" value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
+                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address" data-pattern-id="address" data-pattern-name="address[++][name]"  value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
                                                 <span id="addr"></span><br>
                                             </div>
                                         </div>

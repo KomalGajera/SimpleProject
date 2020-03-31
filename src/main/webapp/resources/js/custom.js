@@ -70,7 +70,23 @@
             		i++;                	
                 }); 
             	$('#oldadd').val(add1);
-            	abc=$('#oldadd').val();              	
+            	abc=$('#oldadd').val(); 
+
+            	$('#example1').repeater({
+            	    btnAddClass: 'r-btnAdd',
+            	    btnRemoveClass: 'r-btnRemove',
+            	    groupClass: 'r-group',
+            	    minItems: 1,
+            	    maxItems: 0,
+            	    startingIndex: 0,
+            	    showMinItemsOnLoad: true,
+            	    reindexOnDelete: true,
+            	    repeatMode: 'append',
+            	    animation: 'fade',
+            	    animationSpeed: 400,
+            	    animationEasing: 'swing',
+            	    clearValues: true
+            	},[add1]);
  	        },
 	        error: function(data) {
 	            alert('woops!');
@@ -223,8 +239,7 @@
                 if ($container.repeatCount > $container.opts.minItems - 1) {
                     $newClone.find('.' + $container.opts.btnRemoveClass).show();
                 }
-              
-               
+                             
 
                 if ($.isFunction($container.opts.afterAdd)) {
                     $container.opts.afterAdd.call(this, $newClone);
@@ -577,9 +592,7 @@
 
 })(jQuery);
 
-window.onload = function() {
-		
-};
+
 
 function getUrlVars()
 {
@@ -594,61 +607,6 @@ function getUrlVars()
     return vars;
 }
 var id = getUrlVars()["id"];	
-if(id==6){
-
-	$('#example1').repeater({
-	    btnAddClass: 'r-btnAdd',
-	    btnRemoveClass: 'r-btnRemove',
-	    groupClass: 'r-group',
-	    minItems: 1,
-	    maxItems: 0,
-	    startingIndex: 0,
-	    showMinItemsOnLoad: true,
-	    reindexOnDelete: true,
-	    repeatMode: 'append',
-	    animation: 'fade',
-	    animationSpeed: 400,
-	    animationEasing: 'swing',
-	    clearValues: true
-	},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'},{'address[2][name]':'mumbai'}]);
-}
-else if(id==14){
-
-	$('#example1').repeater({
-	    btnAddClass: 'r-btnAdd',
-	    btnRemoveClass: 'r-btnRemove',
-	    groupClass: 'r-group',
-	    minItems: 1,
-	    maxItems: 0,
-	    startingIndex: 0,
-	    showMinItemsOnLoad: true,
-	    reindexOnDelete: true,
-	    repeatMode: 'append',
-	    animation: 'fade',
-	    animationSpeed: 400,
-	    animationEasing: 'swing',
-	    clearValues: true
-	},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]);
-}
-else if(id==15){
-
-	$('#example1').repeater({
-	    btnAddClass: 'r-btnAdd',
-	    btnRemoveClass: 'r-btnRemove',
-	    groupClass: 'r-group',
-	    minItems: 1,
-	    maxItems: 0,
-	    startingIndex: 0,
-	    showMinItemsOnLoad: true,
-	    reindexOnDelete: true,
-	    repeatMode: 'append',
-	    animation: 'fade',
-	    animationSpeed: 400,
-	    animationEasing: 'swing',
-	    clearValues: true
-	},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]);
-}
-else{
 
 $('#example1').repeater({
     btnAddClass: 'r-btnAdd',
@@ -665,7 +623,7 @@ $('#example1').repeater({
     animationEasing: 'swing',
     clearValues: true
 });
-}
+
 $.fn.repeater.defaults = {
     groupClass: 'r-group',
     btnAddClass: 'r-btnAdd',

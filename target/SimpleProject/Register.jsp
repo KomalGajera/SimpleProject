@@ -152,7 +152,7 @@
                                         <div class="input-group">
                                             <label class="label">address</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address" data-pattern-name="address[++][name]" data-pattern-id="address" value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
+                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address_0_name" data-pattern-id="address_++_name" data-pattern-name="address[++][name]"  value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
                                                 <span id="addr"></span><br>
                                             </div>
                                         </div>

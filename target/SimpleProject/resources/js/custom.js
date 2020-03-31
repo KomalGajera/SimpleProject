@@ -2,6 +2,8 @@
 
 	var abc;
 	
+	$('#address_1_name').val("hello hiii");
+	
 	$.ajax({url: "displaycountry",type:'POST',
         success: function(list){      	        	
             var select = $('#country');           

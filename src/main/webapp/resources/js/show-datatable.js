@@ -55,8 +55,7 @@ $(document).ready(function() {
     		{
     			alert("you can not delete admin");
     		}
-    	else{
-	    	
+    	else{	    	
 	    	$('<div></div>').appendTo('body')
 	        .html('<div><h6>Are you sure to delete userId:'+paramater+'??</h6></div>')
 	        .dialog({

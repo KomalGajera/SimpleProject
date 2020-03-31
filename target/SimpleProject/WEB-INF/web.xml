@@ -4,148 +4,144 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+	  
+	  <filter>
+	  	<filter-name>f1</filter-name>
+	  	<filter-class>simpleproject.filter.UserFilter</filter-class>
+	  </filter>
+	  
+	  <filter>
+	  	<filter-name>f2</filter-name>
+	  	<filter-class>simpleproject.filter.UserValidation</filter-class>
+	  </filter>	  
+	  
+	  <filter-mapping>
+	  	<filter-name>f1</filter-name>
+	  	<servlet-name>s1</servlet-name>
+	  </filter-mapping>
+	  
+	  <filter-mapping>
+	  	<filter-name>f2</filter-name>
+	  	<url-pattern>/register</url-pattern>
+	  </filter-mapping> 
   
-  <filter>
-  <filter-name>f1</filter-name>
-  <filter-class>simpleproject.filter.UserFilter</filter-class>
-  </filter>
+	  <filter-mapping>
+	  	<filter-name>f2</filter-name>
+	  	<url-pattern>/changepassword</url-pattern>
+	  </filter-mapping> 
   
-  <filter>
-  <filter-name>f2</filter-name>
-  <filter-class>simpleproject.filter.UserValidation</filter-class>
-  </filter>
-  
-  
-  <filter-mapping>
-  <filter-name>f1</filter-name>
-  <servlet-name>s1</servlet-name>
-  </filter-mapping>
-  
- <filter-mapping>
-  <filter-name>f2</filter-name>
-  <url-pattern>/register</url-pattern>
-  </filter-mapping> 
-  
-   <filter-mapping>
-  <filter-name>f2</filter-name>
-  <url-pattern>/changepassword</url-pattern>
-  </filter-mapping> 
-  
-  <servlet>
-  <servlet-name>s1</servlet-name>
-  <servlet-class>simpleproject.controller.UserController</servlet-class>
-  </servlet>
-  
-  <servlet>
-  <servlet-name>s2</servlet-name>
-  <servlet-class>simpleproject.controller.UserController</servlet-class>
-  </servlet>
- 
- 
- <servlet>
-  <servlet-name>s3</servlet-name>
-  <servlet-class>simpleproject.controller.ImageServlet</servlet-class>
-  </servlet>
-  
-  
-  <servlet-mapping>
-  <servlet-name>s3</servlet-name>
-  <url-pattern>/image</url-pattern>
-  </servlet-mapping> 
-  
-
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/displayuser</url-pattern>  
-  </servlet-mapping>
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/hello</url-pattern>  
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/useraddress</url-pattern>  
-  </servlet-mapping>
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/changepassword</url-pattern>  
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/countrydelete</url-pattern>  
-  </servlet-mapping>
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/userbyid</url-pattern>  
-  </servlet-mapping>
-  
-    <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/countryupdate</url-pattern>  
-  </servlet-mapping>
-  
-    <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/statedelete</url-pattern>  
-  </servlet-mapping>
-  
-    <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/stateupdate</url-pattern>  
-  </servlet-mapping>
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/userdelete</url-pattern>  
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/checkemail</url-pattern>  
-  </servlet-mapping>
-  
-  
-    <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/displaycountry</url-pattern>  
-  </servlet-mapping>
-  
-    <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/displaystate</url-pattern>  
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/login</url-pattern>  
-  </servlet-mapping>
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/countryadd</url-pattern>  
-  </servlet-mapping>
-  
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/stateadd</url-pattern>  
-  </servlet-mapping>   
-  
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/checkuser</url-pattern>  
-  </servlet-mapping>  
-   
-  
-   <servlet-mapping>
-  <servlet-name>s1</servlet-name>
- <url-pattern>/register</url-pattern>  
-  </servlet-mapping>
+	  <servlet>
+	  	<servlet-name>s1</servlet-name>
+	  	<servlet-class>simpleproject.controller.UserController</servlet-class>
+	  </servlet>
+	  
+	  <servlet>
+	  	<servlet-name>s2</servlet-name>
+	  	<servlet-class>simpleproject.controller.UserController</servlet-class>
+	  </servlet>	 
+	 
+	  <servlet>
+	  	<servlet-name>s3</servlet-name>
+	  	<servlet-class>simpleproject.controller.ImageServlet</servlet-class>
+	  </servlet>	  
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s3</servlet-name>
+	  	<url-pattern>/image</url-pattern>
+	  </servlet-mapping> 
+	  
+	
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/displayuser</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/hello</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/useraddress</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/changepassword</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/countrydelete</url-pattern>  
+	  </servlet-mapping>
+	  
+	   <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/userbyid</url-pattern>  
+	   </servlet-mapping>
+	  
+	   <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/countryupdate</url-pattern>  
+	   </servlet-mapping>
+	  
+	   <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+		<url-pattern>/statedelete</url-pattern>  
+	   </servlet-mapping>
+	  
+	   <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/stateupdate</url-pattern>  
+	   </servlet-mapping>
+	  
+	   <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/userdelete</url-pattern>  
+	   </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/checkemail</url-pattern>  
+	  </servlet-mapping>
+	  
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/displaycountry</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/displaystate</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/login</url-pattern>  
+	  </servlet-mapping>
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/countryadd</url-pattern>  
+	  </servlet-mapping>	  
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+		<url-pattern>/stateadd</url-pattern>  
+	  </servlet-mapping>   
+	  
+	  
+	  <servlet-mapping>
+	   <servlet-name>s1</servlet-name>
+	   <url-pattern>/checkuser</url-pattern>  
+	  </servlet-mapping>  	   
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s1</servlet-name>
+	 	<url-pattern>/register</url-pattern>  
+	  </servlet-mapping>
   
  <welcome-file-list>
  <welcome-file>Login.jsp</welcome-file> 
