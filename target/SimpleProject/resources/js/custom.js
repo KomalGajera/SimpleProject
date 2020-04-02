@@ -2,8 +2,6 @@
 
 	var abc;
 	
-	$('#address_1_name').val("hello hiii");
-	
 	$.ajax({url: "displaycountry",type:'POST',
         success: function(list){      	        	
             var select = $('#country');           
@@ -457,7 +455,6 @@
 	'use strict';
 	var table = $("#example");
 	
-	
 	$("#email").blur(function(){			
 		 	var email=$( "#email" ).val();    	
  			$.ajax({url: "checkemail",type:'POST',data:'email='+email, 			
@@ -651,12 +648,12 @@ else if(id==15){
 	},[{'address[0][name]':'surat'},{'address[1][name]':'ahemdabad'}]);
 }
 else{
-
+var abc=3;
 $('#example1').repeater({
     btnAddClass: 'r-btnAdd',
     btnRemoveClass: 'r-btnRemove',
     groupClass: 'r-group',
-    minItems: 1,
+    minItems: abc,
     maxItems: 0,
     startingIndex: 0,
     showMinItemsOnLoad: true,

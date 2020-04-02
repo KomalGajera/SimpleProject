@@ -6,15 +6,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import simpleproject.db.DatabaseConnection;
 import simpleproject.entitymodel.User;
-
+/**
+* java program to perform crud operation for user-address information. 
+* @author  komal gajera 
+* @version 11.0.5 
+* @since   2020-03-30  
+*
+*/
 public class UserAddressDaoImpl implements UserAddressDao {
 	
 	DatabaseConnection d=DatabaseConnection.getInstance();
 	Connection con = d.getConnection(); 
-	
+	static final Logger LOGGER = Logger.getLogger(UserAddressDaoImpl.class);
 
+	/** 
+	    * This is the save method which use to store/update user-address data to database 
+	    * @param User is use which contain user address information.
+	    * @return status contain insert success or fail information. 
+	*/
 	@SuppressWarnings("resource")
 	@Override
 	public int save(User u) {
@@ -25,7 +38,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 		String address[]=u.getAddress();
 		List<String> oldaddress=new ArrayList<String>(); 
 		List<String> newaddress=new ArrayList<String>();
-		ResultSet rs,rs1;
+		ResultSet rs;
 		 try{ 		
 		      PreparedStatement ps;
 		      ps = con.prepareStatement("select * from user_address where user_id=?");
@@ -74,22 +87,15 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	         }	
 	         
 		     
-	}catch(Exception e){System.out.println(e);}
+	}catch(Exception e){LOGGER.error("Error while insert/update user-address data"+e.getMessage());}
 		return status;
 	}
 
-	@Override
-	public int delete(User u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int update(User u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	 /** 
+	    * This is the getRecordById() which use to get address record by id.
+	    * @param id is use it contain id of particular user.
+	    * @return list contain information of address which id is match. 
+	 */
 	@Override
 	public List<User> getRecordById(int id) {
 		// TODO Auto-generated method stub
@@ -105,7 +111,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 		           u.setAdd(rs.getString("address"));
 		           list.add(u);		          
 		        }  
-		    }catch(Exception e){System.out.println(e);}  
+		    }catch(Exception e){LOGGER.error("Error while retrive user-address data"+e.getMessage());}  
 		return list;
 	}
 

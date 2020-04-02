@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import simpleproject.entitymodel.User;
 import simpleproject.entitymodel.UserCountry;
@@ -40,6 +43,11 @@ public class UserController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIR = "uploads";
+	static final Logger LOGGER = Logger.getLogger(UserController.class);
+	static{        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        System.setProperty("current.date", dateFormat.format(new Date()));
+    }
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -54,10 +62,12 @@ public class UserController extends HttpServlet {
 		HttpServletRequest requestTemp = (HttpServletRequest) req;
 		HttpSession session = req.getSession();
 		String url = requestTemp.getRequestURI();
-		String json = null;		
+		String json = null;	
+		
 		
 		/*This condition is fetch the country records..*/
 		if (url.equals("/SimpleProject/displaycountry")) {
+			LOGGER.info("processing of retrive country data");
 			List<UserCountry> list = userCountrys.getAllRecords();
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
@@ -67,6 +77,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the user record by id..*/
 		if(url.equals("/SimpleProject/userbyid")) {
+			LOGGER.info("processing of retrive user data by id");
 			int id=Integer.parseInt(req.getParameter("id"));
 			user=userservice.getRecordById(id);
 			json = new Gson().toJson(user);
@@ -77,6 +88,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the user address record by id..*/
 		if(url.equals("/SimpleProject/useraddress")) {
+			LOGGER.info("processing of retrive user address data");
 			int id=Integer.parseInt(req.getParameter("id"));
 			System.out.println(id);
 			List<User> list=useraddress.getRecordById(id);
@@ -98,6 +110,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the user country record by id..*/
 		if(url.equals("/SimpleProject/countryupdate")) {
+			LOGGER.info("processing of retrive country data for upadte");
 			int id=Integer.parseInt(req.getParameter("id"));
 			usercountry=userCountrys.getRecordById(id);
 			json = new Gson().toJson(usercountry);
@@ -108,6 +121,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is delete particular state detail in list of state..*/
 		if(url.equals("/SimpleProject/statedelete")) {
+			LOGGER.info("processing of delete state data");
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userstates.delete(id);
 			json = new Gson().toJson(status);
@@ -118,6 +132,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is delete particular user detail and address delete by trigger*/
 		if(url.equals("/SimpleProject/userdelete")) {
+			LOGGER.info("processing of delete user data");
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userservice.delete(id);
 			json = new Gson().toJson(status);
@@ -128,6 +143,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is delete particular country detail and with all state of this country..*/
 		if(url.equals("/SimpleProject/countrydelete")) {
+			LOGGER.info("processing of delete country data");
 			int id=Integer.parseInt(req.getParameter("id"));
 			int status=userCountrys.delete(id);	
 			json = new Gson().toJson(status);
@@ -138,13 +154,16 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is update new password to particular user...*/
 		if (url.equals("/SimpleProject/changepassword")) {
+			LOGGER.info("processing of change password..");
 			System.out.println("hello");
 			user.setEmail(req.getParameter("email"));
 			user.setPassword(req.getParameter("password"));
 			int status= userservice.getUserByEmail(user);
 			if(status==1) {
+				LOGGER.info("change password successfully..");
 				req.getRequestDispatcher("/Login.jsp").forward(req, resp);
 			}else {
+				LOGGER.error("error in changing password..");
 				req.setAttribute("errormessage","There is some error in updating password...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
 			}
@@ -154,6 +173,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the detail of user is exits or not..*/
 		if (url.equals("/SimpleProject/checkemail")) {
+			LOGGER.info("processing of check email when user is exits or not.");
 			System.out.println(req.getParameter("email"));			
 			  int status = userservice.usercheck(req.getParameter("email")); 
 			  json = new  Gson().toJson(status); 
@@ -164,6 +184,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the state details..*/
 		if (url.equals("/SimpleProject/displaystate")) {
+			LOGGER.info("processing of retrive state data");
 			userstate.setCountry_name(req.getParameter("country"));
 			List<UserState> statelist = null;
 			if(userstate.getCountry_name()==null)
@@ -180,13 +201,16 @@ public class UserController extends HttpServlet {
 		
 		
 		/*This condition is add new country..*/
-		if (url.equals("/SimpleProject/countryadd")) {				
+		if (url.equals("/SimpleProject/countryadd")) {	
+			LOGGER.info("processing of add country data");
 			usercountry.setCountry_id(Integer.parseInt(req.getParameter("country_id")));
 			usercountry.setCountry_name(req.getParameter("country"));
 			int status=userCountrys.save(usercountry);
 			if(status==1) {
+				LOGGER.info("add country successfully..");
 				resp.sendRedirect("addcountry.jsp");
 			}else {
+				LOGGER.error("error in adding country..");
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
 			}		
@@ -195,13 +219,16 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is add new state.*/
 		if (url.equals("/SimpleProject/stateadd")) {
+			LOGGER.info("processing of add state data");
 			userstate.setState_id(Integer.parseInt(req.getParameter("state_id")));
 			userstate.setState_name(req.getParameter("state"));
 			userstate.setCountry_name(req.getParameter("selectcountry"));
 			int status=userstates.save(userstate);
 			if(status==1) {
+				LOGGER.info("add state detail successfully..");
 				resp.sendRedirect("addstate.jsp");
 			}else {
+				LOGGER.error("error in addning state..");
 				req.setAttribute("errormessage","There is some error in insert country...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp); 
 			}
@@ -210,6 +237,7 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is fetch the all user detail..*/
 		if (url.equals("/SimpleProject/displayuser")) {
+			LOGGER.info("processing of retrive user data");
 			List<User> list = userservice.getAllRecords();
 			json = new Gson().toJson(list);
 			resp.setContentType("application/json");
@@ -219,6 +247,8 @@ public class UserController extends HttpServlet {
 		
 		/*This condition is check user is valid or not..*/
 		if (url.equals("/SimpleProject/login")) {
+			
+			LOGGER.info("processing of add user data to database");
 			user.setEmail(req.getParameter("email"));
 			user.setPassword(req.getParameter("password"));
 			int status=userservice.checkuser(user);			
@@ -233,22 +263,20 @@ public class UserController extends HttpServlet {
 					session.setAttribute("user", user.getRole());
 					session.setAttribute("userid", user.getId());
 					session.setAttribute("username",user.getFname());
-					System.out.println(session.getAttribute("normaluser"));
 					session.setMaxInactiveInterval(3000);
 					resp.sendRedirect("user.jsp");
 				}						
 			}else {
+				LOGGER.error("error in login user..");
 				req.setAttribute("errormessage","sorry username and password are wrong...");   
 		        req.getRequestDispatcher("/error.jsp").include(req, resp);  
 			}
-		}
-		
+		}		
 		
 		
 		/*This condition is store new user record or update existing user records*/
 		if (url.equals("/SimpleProject/register")) {			
 			String name = req.getParameter("profile");
-			System.out.println(name);
 			String path = null;
 			InputStream inputStream = null;			
 				String applicationPath = req.getServletContext().getRealPath("");
@@ -267,7 +295,6 @@ public class UserController extends HttpServlet {
 				}
 				File image = new File(path);
 				inputStream = new FileInputStream(image);
-				System.out.println(inputStream);
 			String hobby = "";
 			String lang[] = req.getParameterValues("hobby");
 			for (int i = 0; i < lang.length; i++) {
@@ -296,13 +323,16 @@ public class UserController extends HttpServlet {
 			int status = userservice.save(user, inputStream);
 			if (status == 1) {
 				int addressstatus=useraddress.save(user);
-				if(addressstatus==1) {							
+				if(addressstatus==1) {
+						LOGGER.info("add user data successfully.");
 						resp.sendRedirect("Login.jsp");
 				}else {
+					LOGGER.error("error in while adding address..");
 					req.setAttribute("errormessage", "sorry there is any error in additing address...");
 					req.getRequestDispatcher("/error.jsp").include(req, resp);
 				}			
 			} else {
+				LOGGER.error("error in while adding user..");
 				req.setAttribute("errormessage", "sorry there is any error in additing records...");
 				req.getRequestDispatcher("/error.jsp").include(req, resp);
 			}

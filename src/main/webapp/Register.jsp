@@ -25,7 +25,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="resources/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
     <!-- Main CSS-->
     <link href="resources/css/style.css" rel="stylesheet" media="all">
@@ -64,7 +64,7 @@
                             <label class="label">Profile</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <img id="profileimg" src="resources/images/profile.jpg" alt="your image" style="height:120px; width:120px;" />
-                                <input type="file" placeholder="select profile" name="profile" id="profile">
+                                <input type="file" placeholder="select profile" name="profile" id="profile" accept="image/x-png,image/gif,image/jpeg">
                             </div>
                         </div>
                         <div class="row row-space">
@@ -152,7 +152,7 @@
                                         <div class="input-group">
                                             <label class="label">address</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address" data-pattern-id="address" data-pattern-name="address[++][name]"  value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
+                                                <textarea class="input--style-4" type="text" rows="4" value="${fn:escapeXml(param.address[0][name])}" placeholder="Enter address" name="address[0][name]" id="address_0_name" data-pattern-id="address_++_name" data-pattern-name="address[++][name]"  value="${fn:escapeXml(param.address)}" onblur=" return address_valid()"></textarea>
                                                 <span id="addr"></span><br>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@
 					     <div class="input-group">
 					       <label class="label">state</label>
 					       <div class="rs-select2 js-select-simple">
-					       <select name="state" id="state" class="form-control" type="hidden">
+					       <select name="state" id="state" class="form-control">
 						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		  
 							</select>
 							 <span id="lastname">${state}</span><br>
@@ -207,29 +207,9 @@
 
     <!-- Main JS-->
     <script src="resources/js/custom.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-<!--     <script src="resources/js/jquery.form-repeater.js" type="text/javascript"></script> -->
-    <script type="text/javascript">  
+    <script src="resources/js/jquery-1.12.4.min.js"></script>
 
-  
-    </script>
-
-    <!-- <script type="text/javascript">
-	function Validate() {
-	    var country = document.getElementById("country");
-	    var state = document.getElementById("state");
-	    if (country.value == "") {
-	        //If the "Please Select" option is selected display error.
-	        alert("select country");
-	    }    
-	    if (state.value == "") {
-	    	//If the "Please Select" option is selected display error.
-	    	 alert("select state");
-	   	 	document.getElementById('statemessage').innerHTML = "Please select any state." 
-	    }
-	}
-
-</script> -->
+ 
 
 </body>
 

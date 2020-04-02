@@ -45,6 +45,17 @@
 	  	<servlet-class>simpleproject.controller.ImageServlet</servlet-class>
 	  </servlet>	  
 	  
+	  
+	  <servlet>
+	  	<servlet-name>s4</servlet-name>
+	  	<servlet-class>simpleproject.controller.FtlHello</servlet-class>
+	  </servlet>	  
+	  
+	  <servlet-mapping>
+	  	<servlet-name>s4</servlet-name>
+	  	<url-pattern>/welcome</url-pattern>
+	  </servlet-mapping> 
+	  
 	  <servlet-mapping>
 	  	<servlet-name>s3</servlet-name>
 	  	<url-pattern>/image</url-pattern>
@@ -142,6 +153,16 @@
 	  	<servlet-name>s1</servlet-name>
 	 	<url-pattern>/register</url-pattern>  
 	  </servlet-mapping>
+	  
+	  
+	  <context-param>
+		<param-name>log4j-config-location</param-name>
+		<param-value>WEB-INF/log4j.properties</param-value>
+	</context-param>
+	
+	<listener>
+	<listener-class>simpleproject.controller.ContextListener</listener-class>
+</listener>
   
  <welcome-file-list>
  <welcome-file>Login.jsp</welcome-file> 

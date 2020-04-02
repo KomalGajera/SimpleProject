@@ -25,7 +25,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="resources/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
     <!-- Main CSS-->
     <link href="resources/css/style.css" rel="stylesheet" media="all">
@@ -45,7 +45,7 @@
                     <form method="POST" action="register" enctype="multipart/form-data">
                      <input id="user_id" name="user_id" value="0" type="hidden">
                      <input name="length" id="length" type="hidden" >
-                     <input name="oldadd" id="oldadd" value="{'address[0][name]':'enter address'},{'address[1][name]':'enter address'}" type="hidden">
+                     <input name="oldadd" id="oldadd" type="hidden">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -64,7 +64,7 @@
                             <label class="label">Profile</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <img id="profileimg" src="resources/images/profile.jpg" alt="your image" style="height:120px; width:120px;" />
-                                <input type="file" placeholder="select profile" name="profile" id="profile">
+                                <input type="file" placeholder="select profile" name="profile" id="profile" accept="image/x-png,image/gif,image/jpeg">
                             </div>
                         </div>
                         <div class="row row-space">
@@ -178,7 +178,7 @@
 					     <div class="input-group">
 					       <label class="label">state</label>
 					       <div class="rs-select2 js-select-simple">
-					       <select name="state" id="state" class="form-control" type="hidden">
+					       <select name="state" id="state" class="form-control">
 						   <option disabled="disabled" selected="selected" value="0">Choose State</option>		  
 							</select>
 							 <span id="lastname">${state}</span><br>
@@ -207,29 +207,9 @@
 
     <!-- Main JS-->
     <script src="resources/js/custom.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-<!--     <script src="resources/js/jquery.form-repeater.js" type="text/javascript"></script> -->
-    <script type="text/javascript">  
+    <script src="resources/js/jquery-1.12.4.min.js"></script>
 
-  
-    </script>
-
-    <!-- <script type="text/javascript">
-	function Validate() {
-	    var country = document.getElementById("country");
-	    var state = document.getElementById("state");
-	    if (country.value == "") {
-	        //If the "Please Select" option is selected display error.
-	        alert("select country");
-	    }    
-	    if (state.value == "") {
-	    	//If the "Please Select" option is selected display error.
-	    	 alert("select state");
-	   	 	document.getElementById('statemessage').innerHTML = "Please select any state." 
-	    }
-	}
-
-</script> -->
+ 
 
 </body>
 

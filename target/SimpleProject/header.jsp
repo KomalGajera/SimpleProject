@@ -12,7 +12,7 @@ if(session.getAttribute("username")==null)
     response.sendRedirect("Login.jsp");
 %>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="resources/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-lg" id="menu">
  <input type="hidden" id="user" name="user" value="${sessionScope.user}">
 <input type="hidden" id="user_id" name="user_id" value="${sessionScope.userid}">

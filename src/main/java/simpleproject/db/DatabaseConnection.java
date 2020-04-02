@@ -3,6 +3,7 @@ package simpleproject.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class DatabaseConnection {
 
@@ -11,14 +12,15 @@ public class DatabaseConnection {
     private String url = "jdbc:mysql://localhost:3306/employee";
     private String username = "root";
     private String password = "root";
+    static final Logger LOGGER = Logger.getLogger(DatabaseConnection.class);
 
     private DatabaseConnection() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("connection method called.....");
+            LOGGER.info("Database connect sucessfully...");
             this.connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException ex) {
-            System.out.println("Database Connection Creation Failed : " + ex.getMessage());
+        	LOGGER.error("Database Connection Creation Failed : " + ex.getMessage());
         }
     }
 

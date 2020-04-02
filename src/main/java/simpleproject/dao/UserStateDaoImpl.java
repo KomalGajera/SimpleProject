@@ -6,15 +6,29 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import simpleproject.db.DatabaseConnection;
 import simpleproject.entitymodel.UserState;
-
+/**
+* java program to perform crud operation for user-state information. 
+* @author  komal gajera 
+* @version 11.0.5 
+* @since   2020-03-30  
+*
+*/
 public class UserStateDaoImpl implements UserStateDao {
 
 	
 	DatabaseConnection d=DatabaseConnection.getInstance();
-	Connection con = d.getConnection();
-	@SuppressWarnings("resource")
+	Connection con = d.getConnection();	
+	static final Logger LOGGER = Logger.getLogger(UserStateDaoImpl.class);
+	
+	/** 
+	    * This is the save method which use to store user-state data to database 
+	    * @param userstate is use it contain state information.
+	    * @return status contain insert success or fail information. 
+	    */
+	@SuppressWarnings("resource")     
 	@Override
 	public int save(UserState userstate) {
 		// TODO Auto-generated method stub
@@ -48,15 +62,21 @@ public class UserStateDaoImpl implements UserStateDao {
     		  status=ps.executeUpdate(); 
           }		
 		
-		  }catch(Exception e){System.out.println(e);} 
+		  }catch(Exception e){LOGGER.error("Error while insert user-state data"+e.getMessage());} 
 	       return status; 
 	}
 
+	
+	
+	 /** 
+	    * This is the getAllRecords method which use to retrieve user-state data from database.
+	    * @param no argument.
+	    * @return list<UserState> this list contain information of all state. 
+	    */ 
 	@Override
 	public List<UserState> getAllRecords() {
 		// TODO Auto-generated method stub
 		 List<UserState> list=new ArrayList<UserState>(); 
-		 int country_id=0;
 		 PreparedStatement ps;
 		 ResultSet rs;
 		    try{ 
@@ -69,10 +89,16 @@ public class UserStateDaoImpl implements UserStateDao {
 			            u1.setCountry_name(rs.getString("country_name"));
 			            list.add(u1);  
 			        } 	    	
-		    }catch(Exception e){System.out.println(e);}
+		    }catch(Exception e){LOGGER.error("Error while retrive user-state data"+e.getMessage());}
 		    return list;
 	}
-
+	
+	
+	 /** 
+	    * This is the getAllMethodByName() which use to get record for particular user-state from database 
+	    * @param userstate is use it contain state information.
+	    * @return list contain information of particular state. 
+    */ 
 	@Override
 	public List<UserState> getAllRecordsByName(UserState userstate) {
 		// TODO Auto-generated method stub
@@ -89,10 +115,16 @@ public class UserStateDaoImpl implements UserStateDao {
 			            u.setState_name(rs.getString("state_name"));
 			            list.add(u);  
 			        }	    	
-		    }catch(Exception e){System.out.println(e);}
+		    }catch(Exception e){LOGGER.error("Error while retrive user-state data by name"+e.getMessage());}
 		    return list;
 	}
-
+	
+	
+	 /** 
+	    * This is the getRecordById() which use to get record by id.
+	    * @param id is use it contain id of particular state.
+	    * @return UserState contain information of state which id is match. 
+	 */ 
 	@Override
 	public UserState getRecordById(int id) {
 		// TODO Auto-generated method stub
@@ -109,10 +141,16 @@ public class UserStateDaoImpl implements UserStateDao {
 	            u.setState_name(rs.getString("State_name"));
 	           
 	        }  
-	    }catch(Exception e){System.out.println(e);}  
+	    }catch(Exception e){LOGGER.error("Error while retrive user-state data by id"+e.getMessage());}  
 	    return u; 
 	}
-
+	
+	
+	 /** 
+	    * This is the delete() which use to delete record by id.
+	    * @param id is use it contain id of particular state.
+	    * @return status contain information of state is delete success or fail. 
+	 */ 
 	@Override
 	public int delete(int id) {
 		// TODO Auto-generated method stub
@@ -121,7 +159,7 @@ public class UserStateDaoImpl implements UserStateDao {
 	        PreparedStatement ps=con.prepareStatement("delete from state_detail where state_id=?");  
 	        ps.setInt(1,id);  
 	        status=ps.executeUpdate();  
-	    }catch(Exception e){System.out.println(e);}  
+	    }catch(Exception e){LOGGER.error("Error while retrive delete state data"+e.getMessage());}  
 	  
 	    return status;  
 	}

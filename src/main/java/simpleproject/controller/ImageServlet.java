@@ -27,7 +27,6 @@ public class ImageServlet extends HttpServlet{
 			  String name = req.getParameter("name");
 			  
 			  User u=user.getImageInTable(name);
-			  System.out.println("name is::"+u.getImageFileName());
 			  resp.getOutputStream().write(u.getImageData()); out.write(u.getImageData());
 			 
             

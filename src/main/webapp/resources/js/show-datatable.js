@@ -13,6 +13,7 @@ $(document).ready(function() {
             	var user_id=$( "#user_id" ).val(); 
             	if(user=='user')
             	{
+            		$('tr th:nth-child(12)').hide();
             		if(user_id==value.id){
             		 table.append("<tr><td>"+value.id+"</td>" +
                       		"<td><a href='userprofile.jsp?id="+value.id+"'>"+value.fname+"</a></td>"+
@@ -25,7 +26,7 @@ $(document).ready(function() {
                       		"<td>"+value.state+"</td>"+
                       		"<td>"+value.role+"</td>"+
                       		"<td><a href='Register.jsp?id="+value.id+"'>update</a></td>"+
-                      		"<td><a href='#'>delete</a></td></tr>");
+                      		"</tr>");
             		}
             	}
             	else{
@@ -40,7 +41,8 @@ $(document).ready(function() {
                      		"<td>"+value.state+"</td>"+
                      		"<td>"+value.role+"</td>"+
                      		"<td><a href='Register.jsp?id="+value.id+"'>update</a></td>"+
-                     		"<td><a href='#' onClick='$(this).deleteuser("+value.id+","+value.role+")'>delete</a></td></tr>");
+                     		(value.role =='user' ? "<td><a href='#' onClick='$(this).deleteuser("+value.id+","+value.role+")'>delete</a></td></tr>": "<td></td></tr>"));  
+	            		 	               
                 
             	}    	
             	
